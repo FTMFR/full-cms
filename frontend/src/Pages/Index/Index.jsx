@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import Header from "../../Components/Header/Header";
 import LastCourse from "../../Components/LastCourse/LastCourse";
+import AboutUs from "../../Components/AboutUs/AboutUs";
 
 const Index = () => {
   return (
@@ -9,6 +10,8 @@ const Index = () => {
       <Header />
 
       <LastCourse />
+
+      <AboutUs />
     </>
   );
 };
