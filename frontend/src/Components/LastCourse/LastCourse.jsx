@@ -1,17 +1,26 @@
 import React from "react";
 import "./lastCourse.css";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import CourseBox from "../CourseBox/CourseBox";
 
 const LastCourse = () => {
   return (
     <>
-      <div class="courses">
-        <div class="container">
+      <div className="course">
+        <div className="container">
           <SectionHeader
             title="جدیدترین دوره ها"
-            desc="سکوی پرتاپ شما به سمت موفقیت"
+            desc="سکوی پرتاب شما به سمت موفقیت"
             btnTitle="تمامی دوره ها"
           />
+
+          <div className="course-content">
+            <div className="container">
+              <div className="row">
+                <CourseBox />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
