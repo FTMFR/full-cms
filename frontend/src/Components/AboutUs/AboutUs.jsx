@@ -17,18 +17,22 @@ const AboutUs = () => {
             <AboutUsBox
               title="دوره های اختصاصی"
               desc="با پشتیبانی و کیفیت بالا ارائه میده !"
+              icon="fa-brands fa-discourse"
             />
             <AboutUsBox
-              title="دوره های اختصاصی"
-              desc="با پشتیبانی و کیفیت بالا ارائه میده !"
+              title="سوالات متداول شما"
+              desc="اگر از خرید پشیمان شویم، امکان بازگشت وجه وجود دارد؟"
+              icon="fa-regular fa-circle-question"
             />
             <AboutUsBox
-              title="دوره های اختصاصی"
-              desc="با پشتیبانی و کیفیت بالا ارائه میده !"
+              title="نحوه دریافت تخفیف"
+              desc="حداقل خرید برای دریافت تخفیف چقدر است؟"
+              icon="fa-regular fa-registered"
             />
             <AboutUsBox
-              title="دوره های اختصاصی"
-              desc="با پشتیبانی و کیفیت بالا ارائه میده !"
+              title="تدریس در سایت"
+              desc="شرایط اپلای برای تدریس در سایت چیست؟"
+              icon="fa-solid fa-chalkboard-user"
             />
           </div>
         </div>
