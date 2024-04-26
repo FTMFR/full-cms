@@ -1,12 +1,19 @@
 import React from "react";
 import "./landing.css";
+import Typewriter from "typewriter-effect";
 
 const Landing = () => {
   return (
     <section class="landing">
       <div class="container">
         <h1 class="landing__title">
-          ما به هر قیمتی دوره آموزشی تولید نمی کنیم !
+          <Typewriter
+            options={{
+              strings: ["ما به هر قیمتی دوره آموزشی تولید نمی کنیم!"],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </h1>
         <h2 class="landing__subtitle">
           با آکادمی سبزلرن، برنامه نویسی رو با خیال راحت یاد بگیر و پیشرفت کن.
