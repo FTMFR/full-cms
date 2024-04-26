@@ -1,10 +1,9 @@
-import React from 'react'
-import './index.css'
+import React from "react";
+import "./index.css";
+import Header from "../../Components/Header/Header";
 
 const Index = () => {
-  return (
-    <div>Index</div>
-  )
-}
+  return <Header />;
+};
 
-export default Index
+export default Index;
