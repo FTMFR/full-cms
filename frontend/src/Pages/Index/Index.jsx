@@ -3,6 +3,8 @@ import "./index.css";
 import Header from "../../Components/Header/Header";
 import LastCourse from "../../Components/LastCourse/LastCourse";
 import AboutUs from "../../Components/AboutUs/AboutUs";
+import PopularCourses from "../../Components/PopularCourses/PopularCourses";
+import PreSellCourses from "../../Components/PreSell/PreSellCourses";
 
 const Index = () => {
   return (
@@ -10,6 +12,10 @@ const Index = () => {
       <Header />
 
       <LastCourse />
+
+      <PopularCourses />
+
+      <PreSellCourses />
 
       <AboutUs />
     </>
