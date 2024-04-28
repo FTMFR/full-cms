@@ -9,7 +9,7 @@ const AboutUs = () => {
       <div class="container">
         <SectionHeader
           title="ما چه کمکی بهتون میکنیم؟"
-          desc="از اونجایی که آکادمی آموزشی سبزلرن یک آکادمی خصوصی هست"
+          desc="از اونجایی که آکادمی آموزشی یک آکادمی خصوصی هست"
         />
 
         <div class="container">

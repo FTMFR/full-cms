@@ -6,6 +6,7 @@ import AboutUs from "../../Components/AboutUs/AboutUs";
 import PopularCourses from "../../Components/PopularCourses/PopularCourses";
 import PreSellCourses from "../../Components/PreSell/PreSellCourses";
 import LastArticles from "../../Components/LastArticles/LastArticles";
+import Footer from "../../Components/Footer/Footer";
 
 const Index = () => {
   return (
@@ -21,6 +22,8 @@ const Index = () => {
       <LastArticles />
 
       <AboutUs />
+
+      <Footer />
     </>
   );
 };
