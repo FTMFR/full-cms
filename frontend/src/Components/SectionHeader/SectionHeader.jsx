@@ -1,7 +1,7 @@
 import React from "react";
 import "./sectionHeader.css";
 
-const SectionHeader = ({title, desc, btnTitle}) => {
+const SectionHeader = ({ title, desc, btnTitle }) => {
   return (
     <div>
       <div class="courses-header">
@@ -12,7 +12,7 @@ const SectionHeader = ({title, desc, btnTitle}) => {
         {btnTitle ? (
           <div class="courses-header__left">
             <a href="/" class="courses-header__link">
-              تمامی دوره ها
+              {btnTitle}
               <i class="fas fa-arrow-left courses-header__icon"></i>
             </a>
           </div>
