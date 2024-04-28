@@ -18,6 +18,8 @@ const LastCourse = () => {
             <div className="container">
               <div className="row">
                 <CourseBox />
+                <CourseBox />
+                <CourseBox />
               </div>
             </div>
           </div>
