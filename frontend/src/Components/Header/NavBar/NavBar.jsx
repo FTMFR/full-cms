@@ -8,7 +8,7 @@ const NavBar = () => {
         <div className="main-header__content">
           <div className="main-header__right">
             <img
-              src="images/logo/logo.png"
+              src="/images/logo/logo.png"
               alt="لوگو"
               className="main-header__logo"
             />
