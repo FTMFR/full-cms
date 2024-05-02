@@ -5,6 +5,7 @@ import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
 import CourseDetailBox from "../../Components/CourseDetailBox/CourseDetailBox";
+import Comments from "../../Components/Comments/Comments";
 
 const CourseInfo = () => {
   return (
@@ -328,7 +329,36 @@ const CourseInfo = () => {
                   </div>
                 </div>
 
-              
+                <div class="techer-details">
+                  <div class="techer-details__header">
+                    <div class="techer-details__header-right">
+                      <img
+                        src="/images/info/teacher.jfif"
+                        alt="Teacher Profile"
+                        class="techer-details__header-img"
+                      />
+                      <div class="techer-details__header-titles">
+                        <a href="/" class="techer-details__header-link">
+                          محمدامین سعیدی راد
+                        </a>
+                        <span class="techer-details__header-skill">
+                          Front End & Back End Developer
+                        </span>
+                      </div>
+                    </div>
+                    <div class="techer-details__header-left">
+                      <i class="fas fa-chalkboard-teacher techer-details__header-icon"></i>
+                      <span class="techer-details__header-name">مدرس</span>
+                    </div>
+                  </div>
+                  <p class="techer-details__footer">
+                    اول از همه برنامه نویسی اندروید رو شروع کردم و نزدیک به 2
+                    سال با زبان جاوا اندروید کار میکردم .بعد تصمیم گرفتم در
+                    زمینه وب فعالیت داشته باشم.و..
+                  </p>
+                </div>
+
+                <Comments />
               </div>
             </div>
 
@@ -337,8 +367,7 @@ const CourseInfo = () => {
                 <div class="course-info">
                   <div class="course-info__register">
                     <span class="course-info__register-title">
-                      <i class="fas fa-graduation-cap course-info__register-icon"></i>
-                    {' '}
+                      <i class="fas fa-graduation-cap course-info__register-icon"></i>{" "}
                       دانشجوی دوره هستید
                     </span>
                   </div>
@@ -349,8 +378,8 @@ const CourseInfo = () => {
                       <div class="course-info__total-sale">
                         <i class="fas fa-user-graduate course-info__total-sale-icon"></i>
                         <span class="course-info__total-sale-text">
-                       {' '}
-                          تعداد دانشجو: {' '}
+                          {" "}
+                          تعداد دانشجو:{" "}
                         </span>
                         <span class="course-info__total-sale-number">178</span>
                       </div>
@@ -383,7 +412,7 @@ const CourseInfo = () => {
                 <div class="course-info">
                   <span class="course-info__topic-title">سرفصل های دوره</span>
                   <span class="course-info__topic-text">
-                    برای مشاهده و یا دانلود دوره روی کلمه 
+                    برای مشاهده و یا دانلود دوره روی کلمه
                     <a href="/" style={{ color: "blue", fontWeight: "bold" }}>
                       {" "}
                       لینک
