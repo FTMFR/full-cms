@@ -90,20 +90,20 @@ const NavBar = () => {
               <li className="main-header__item">
                 <a href="/" className="main-header__link">
                   مقالات
-                  <i class="fas fa-angle-down main-header__link-icon"></i>
-                  <ul class="main-header__dropdown">
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                  <i className="fas fa-angle-down main-header__link-icon"></i>
+                  <ul className="main-header__dropdown">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         توسعه وب
                       </a>
                     </li>
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         جاوا اسکریپت
                       </a>
                     </li>
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         فرانت اند
                       </a>
                     </li>
@@ -112,22 +112,22 @@ const NavBar = () => {
               </li>
 
               <li className="main-header__item">
-                <a href="/" class="main-header__link">
+                <a href="/" className="main-header__link">
                   پایتون
-                  <i class="fas fa-angle-down main-header__link-icon"></i>
-                  <ul class="main-header__dropdown">
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                  <i className="fas fa-angle-down main-header__link-icon"></i>
+                  <ul className="main-header__dropdown">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         دوره متخصص پایتون
                       </a>
                     </li>
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         دوره هوش مصنوعی با پایتون
                       </a>
                     </li>
-                    <li class="main-header__dropdown-item">
-                      <a href="/" class="main-header__dropdown-link">
+                    <li className="main-header__dropdown-item">
+                      <a href="/" className="main-header__dropdown-link">
                         دوره متخصص جنگو
                       </a>
                     </li>
@@ -135,7 +135,7 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="main-header__item">
-                <a href="/" class="main-header__link">
+                <a href="/" className="main-header__link">
                   مهارت های نرم
                 </a>
               </li>
@@ -145,11 +145,11 @@ const NavBar = () => {
             <a href="/" className="main-header__search-btn">
               <i className="fas fa-search main-header__search-icon"></i>
             </a>
-            <a href="/" class="main-header__cart-btn">
-              <i class="fas fa-shopping-cart main-header__cart-icon"></i>
+            <a href="/" className="main-header__cart-btn">
+              <i className="fas fa-shopping-cart main-header__cart-icon"></i>
             </a>
-            <a href="/" class="main-header__profile">
-              <span class="main-header__profile-text">فاطمه فرج زاده</span>
+            <a href="/" className="main-header__profile">
+              <span className="main-header__profile-text">فاطمه فرج زاده</span>
             </a>
           </div>
         </div>

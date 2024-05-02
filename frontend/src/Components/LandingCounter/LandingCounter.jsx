@@ -15,7 +15,7 @@ const LandingCounter = ({ count }) => {
     return () => clearInterval(interval);
   }, [courseCounter, count]);
 
-  return <span class="landing-status__count">{courseCounter}</span>;
+  return <span className="landing-status__count">{courseCounter}</span>;
 };
 
 export default LandingCounter;
