@@ -1,4 +1,8 @@
 /* Start Footer Styles */
+.footer{
+  margin-top: 2rem;
+}
+
 
 .footer-widgets {
   background-color: #f0f2f7;
