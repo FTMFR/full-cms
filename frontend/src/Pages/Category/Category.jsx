@@ -3,6 +3,7 @@ import "./category.css";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
 import NavBar from "../../Components/Header/NavBar/NavBar";
+
 import CourseBox from "../../Components/CourseBox/CourseBox";
 import Pagintaion from "../../Components/Pagination/Pagintaion";
 
@@ -10,7 +11,6 @@ const Category = () => {
   return (
     <>
       <TopBar />
-      <NavBar />
 
       <section className="courses">
         <div className="container">
@@ -73,11 +73,9 @@ const Category = () => {
             </div>
           </div>
 
-          <Pagintaion /> 
-
+          <Pagintaion />
         </div>
       </section>
-
 
       <Footer />
     </>
