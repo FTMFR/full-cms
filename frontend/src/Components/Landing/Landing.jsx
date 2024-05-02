@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./landing.css";
 import Typewriter from "typewriter-effect";
 import LandingCounter from "../LandingCounter/LandingCounter";
@@ -86,7 +86,9 @@ const Landing = () => {
               </g>
             </svg>
             <LandingCounter count={51281} />
-            <span className="landing-status__text">دقیقه آموزش تولید کردیم</span>
+            <span className="landing-status__text">
+              دقیقه آموزش تولید کردیم
+            </span>
           </div>
         </div>
       </div>
