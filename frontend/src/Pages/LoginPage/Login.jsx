@@ -5,8 +5,13 @@ import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import { Link } from "react-router-dom";
 import Input from "../../Components/Form/Input";
+import Button from "../../Components/Form/Button";
 
 const Login = () => {
+  const userLogin = (e) => {
+    e.preventDefault()
+    console.log("User Login");
+  };
   return (
     <>
       <TopBar />
@@ -43,10 +48,15 @@ const Login = () => {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <button className="login-form__btn" type="submit">
+            <Button
+              className="login-form__btn"
+              type="submit"
+              onClick={userLogin}
+              disabled={false}
+            >
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
-            </button>
+            </Button>
             <div className="login-form__password-setting">
               <label className="login-form__password-remember">
                 <input
