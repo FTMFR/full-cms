@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import Header from "../../Components/Header/Header";
 import LastCourse from "../../Components/LastCourse/LastCourse";
@@ -8,7 +8,9 @@ import PreSellCourses from "../../Components/PreSell/PreSellCourses";
 import LastArticles from "../../Components/LastArticles/LastArticles";
 import Footer from "../../Components/Footer/Footer";
 
-const Index = () => {
+const Index = (props) => {
+  const [show, setModalShow] = useState(true);
+
   return (
     <>
       <Header />
