@@ -130,11 +130,11 @@ const Article = () => {
                   className="article__secondary-banner"
                 />
 
-                <div class="article-section">
-                  <h2 class="article-section__title">
+                <div className="article-section">
+                  <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
-                  <p class="paragraph article-section__text">
+                  <p className="paragraph article-section__text">
                     توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین
                     سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی
                     هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه
@@ -148,14 +148,14 @@ const Article = () => {
                   <img
                     src="/images/blog/4.png"
                     alt="article body img"
-                    class="article-section__img"
+                    className="article-section__img"
                   />
                 </div>
-                <div class="article-section">
-                  <h2 class="article-section__title">
+                <div className="article-section">
+                  <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
-                  <p class="paragraph article-section__text">
+                  <p className="paragraph article-section__text">
                     توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین
                     سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی
                     هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه
@@ -167,11 +167,11 @@ const Article = () => {
                     و به زبان فارسی این زبان را یاد بگیرید.
                   </p>
                 </div>
-                <div class="article-section">
-                  <h2 class="article-section__title">
+                <div className="article-section">
+                  <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
-                  <p class="paragraph article-section__text">
+                  <p className="paragraph article-section__text">
                     توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین
                     سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی
                     هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه
@@ -185,42 +185,44 @@ const Article = () => {
                   <img
                     src="/images/blog/3.jpg"
                     alt="article body img"
-                    class="article-section__img"
+                    className="article-section__img"
                   />
                 </div>
 
-                <div class="article-social-media">
-                  <span class="article-social-media__text">اشتراک گذاری :</span>
-                  <a href="/" class="article-social-media__link">
-                    <i class="fab fa-telegram-plane article-social-media__icon"></i>
+                <div className="article-social-media">
+                  <span className="article-social-media__text">
+                    اشتراک گذاری :
+                  </span>
+                  <a href="/" className="article-social-media__link">
+                    <i className="fab fa-telegram-plane article-social-media__icon"></i>
                   </a>
-                  <a href="/" class="article-social-media__link">
-                    <i class="fab fa-twitter article-social-media__icon"></i>
+                  <a href="/" className="article-social-media__link">
+                    <i className="fab fa-twitter article-social-media__icon"></i>
                   </a>
-                  <a href="/" class="article-social-media__link">
-                    <i class="fab fa-facebook-f article-social-media__icon"></i>
+                  <a href="/" className="article-social-media__link">
+                    <i className="fab fa-facebook-f article-social-media__icon"></i>
                   </a>
                 </div>
 
-                <div class="suggestion-articles">
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="suggestion-articles__right suggestion-articles__content">
-                        <a href="/" class="suggestion-articles__icon-link">
-                          <i class="fas fa-arrow-right suggestion-articles__icon"></i>
+                <div className="suggestion-articles">
+                  <div className="row">
+                    <div className="col-6">
+                      <div className="suggestion-articles__right suggestion-articles__content">
+                        <a href="/" className="suggestion-articles__icon-link">
+                          <i className="fas fa-arrow-right suggestion-articles__icon"></i>
                         </a>
-                        <a href="/" class="suggestion-articles__link">
+                        <a href="/" className="suggestion-articles__link">
                           سریع ترین و بهترین راه یادگیری جاوا اسکریپت چیست؟ |
                           تجربه برنامه نویسان
                         </a>
                       </div>
                     </div>
-                    <div class="col-6">
-                      <div class="suggestion-articles__left suggestion-articles__content">
-                        <a href="/" class="suggestion-articles__icon-link">
-                          <i class="fas fa-arrow-left suggestion-articles__icon"></i>
+                    <div className="col-6">
+                      <div className="suggestion-articles__left suggestion-articles__content">
+                        <a href="/" className="suggestion-articles__icon-link">
+                          <i className="fas fa-arrow-left suggestion-articles__icon"></i>
                         </a>
-                        <a href="/" class="suggestion-articles__link">
+                        <a href="/" className="suggestion-articles__link">
                           سریع ترین و بهترین راه یادگیری جاوا اسکریپت چیست؟ |
                           تجربه برنامه نویسان
                         </a>
