@@ -1,7 +1,8 @@
 import React from "react";
 import "./sectionHeader.css";
+import { Link } from "react-router-dom";
 
-const SectionHeader = ({ title, desc, btnTitle }) => {
+const SectionHeader = ({ title, desc, btnTitle, href }) => {
   return (
     <div>
       <div className="courses-header">
@@ -11,10 +12,10 @@ const SectionHeader = ({ title, desc, btnTitle }) => {
         </div>
         {btnTitle ? (
           <div className="courses-header__left">
-            <a href="/" className="courses-header__link">
+            <Link to={`/${href}`} className="courses-header__link">
               {btnTitle}
               <i className="fas fa-arrow-left courses-header__icon"></i>
-            </a>
+            </Link>
           </div>
         ) : null}
       </div>

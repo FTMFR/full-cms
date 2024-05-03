@@ -12,6 +12,7 @@ const LastCourse = () => {
             title="جدیدترین دوره ها"
             desc="سکوی پرتاب شما به سمت موفقیت"
             btnTitle="تمامی دوره ها"
+            href='courses'
           />
 
           <div className="course-content">
