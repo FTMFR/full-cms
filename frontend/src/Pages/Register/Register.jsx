@@ -4,6 +4,7 @@ import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import { Link } from "react-router-dom";
 import "./../LoginPage/login.css";
+import Input from "../../Components/Form/Input";
 
 const Register = () => {
   return (
@@ -27,7 +28,8 @@ const Register = () => {
           </div>
           <form action="#" className="login-form">
             <div className="login-form__username">
-              <input
+              <Input
+                element="input"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری"
@@ -35,17 +37,19 @@ const Register = () => {
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
             <div className="login-form__password">
-              <input
+              <Input
+                element="input"
                 className="login-form__password-input"
-                type="text"
+                type="email"
                 placeholder="آدرس ایمیل"
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
             </div>
             <div className="login-form__password">
-              <input
+              <Input
+                element="input"
                 className="login-form__password-input"
-                type="text"
+                type="password"
                 placeholder="رمز عبور"
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>

@@ -7,11 +7,9 @@ const NavBar = () => {
       <div className="container-fluid">
         <div className="main-header__content">
           <div className="main-header__right">
-            <img
-              src="/images/logo/logo.png"
-              alt="لوگو"
-              className="main-header__logo"
-            />
+           <h1>
+            LOGO
+           </h1>
             <ul className="main-header__menu">
               <li className="main-header__item">
                 <a href="/" className="main-header__link">
