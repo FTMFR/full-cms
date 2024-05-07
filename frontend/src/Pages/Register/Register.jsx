@@ -6,8 +6,29 @@ import { Link } from "react-router-dom";
 import "./../LoginPage/login.css";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
+import { useForm } from "../../hooks/useFor";
+import {
+  emailValidator,
+  minValidator,
+  requiredValidator,
+} from "../../validators/rules";
 
 const Register = () => {
+  const [formState, onInputHandler] = useForm(
+    {
+      username: {
+        value: "",
+        isValid: false,
+      },
+
+      password: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
+
   const registerNewUser = (e) => {
     e.preventDefault();
     console.log("User Register");
@@ -35,15 +56,23 @@ const Register = () => {
           <form action="#" className="login-form">
             <div className="login-form__username">
               <Input
+              id='username'
                 element="input"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری"
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  emailValidator(),
+                ]}
+                onInputHandler={onInputHandler}
               />
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
             <div className="login-form__password">
               <Input
+              id='email'
                 element="input"
                 className="login-form__password-input"
                 type="email"
@@ -57,13 +86,23 @@ const Register = () => {
                 className="login-form__password-input"
                 type="password"
                 placeholder="رمز عبور"
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  emailValidator(),
+                ]}
+                onInputHandler={onInputHandler}
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
             <Button
-              className="login-form__btn"
+              className={`login-form__btn ${
+                formState.isFormValid
+                  ? "login-form__btn-success"
+                  : "login-form__btn-error"
+              }`}
               type="submit"
-              disabled={false}
+              disabled={!formState.isFormValid}
               onClick={registerNewUser}
             >
               <i className="login-form__btn-icon fa fa-user-plus"></i>
