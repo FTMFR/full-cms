@@ -25,6 +25,16 @@ const Register = () => {
         value: "",
         isValid: false,
       },
+  
+      name: {
+        value: "",
+        isValid: false,
+      },
+
+      password: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
@@ -56,14 +66,30 @@ const Register = () => {
           <form action="#" className="login-form">
             <div className="login-form__username">
               <Input
-              id='username'
+                id="name"
+                element="input"
+                className="login-form__username-input"
+                type="text"
+                placeholder="نام و نلم خانوادگی"
+                validations={[
+                  requiredValidator(),
+                  minValidator(6),
+                  emailValidator(),
+                ]}
+                onInputHandler={onInputHandler}
+              />
+              <i className="login-form__username-icon fa fa-user"></i>
+            </div>
+            <div className="login-form__username">
+              <Input
+                id="username"
                 element="input"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری"
                 validations={[
                   requiredValidator(),
-                  minValidator(8),
+                  minValidator(5),
                   emailValidator(),
                 ]}
                 onInputHandler={onInputHandler}
@@ -72,7 +98,7 @@ const Register = () => {
             </div>
             <div className="login-form__password">
               <Input
-              id='email'
+                id="email"
                 element="input"
                 className="login-form__password-input"
                 type="email"
