@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./../LoginPage/login.css";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
@@ -13,8 +13,11 @@ import {
   requiredValidator,
   maxValidator,
 } from "../../validators/rules";
+import AuthContext from "../../Components/context/authContext";
 
 const Register = () => {
+  const authContext = useContext(AuthContext);
+
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -56,14 +59,13 @@ const Register = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUserInfos),
-      redirect: "follow",
     };
 
     console.log(newUserInfos, "newUserInfos");
 
     fetch("http://localhost:4000/v1/auth/register", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result.accessToken))
+      .then((result) => authContext.login(result.user, result.accessToken))
       .catch((error) => console.error(error));
 
     console.log("User Register");
