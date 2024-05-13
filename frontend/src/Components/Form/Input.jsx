@@ -5,6 +5,7 @@ import validator from "../../validators/validator";
 const inputReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE": {
+      // console.log(action.value, 'inputs');
       return {
         ...state,
         value: action.value,
@@ -21,13 +22,14 @@ const Input = (props) => {
   const [mainInput, dispatch] = useReducer(inputReducer, {
     value: "",
     isValid: false,
+    // console.log(),
   });
 
   const { value, isValid } = mainInput;
-  const { id,onInputHandler } = props;
-  
+  const { id, onInputHandler } = props;
+
   useEffect(() => {
-    onInputHandler(id, isValid, value);
+    onInputHandler(id, value, isValid);
   }, [value]);
 
   const onChangeHandler = (e) => {

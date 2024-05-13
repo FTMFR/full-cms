@@ -13,6 +13,9 @@ const validator = (value, validations) => {
     if (validator.value === rules.minValue) {
       value.trim().length < validator.min && validatorResults.push(false);
     }
+    if (validator.value === rules.maxValue) {
+      value.trim().length > validator.max && validatorResults.push(false);
+    }
     if (validator.value === rules.emailValue) {
       !regex.textEmail(value) && validatorResults.push(false);
     }

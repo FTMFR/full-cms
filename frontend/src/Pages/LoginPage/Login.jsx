@@ -11,7 +11,7 @@ import {
   minValidator,
   requiredValidator,
 } from "../../validators/rules";
-import { useForm } from "../../hooks/useFor";
+import { useForm } from "../../hooks/useForm";
 
 const Login = () => {
   const [formState, onInputHandler] = useForm(
