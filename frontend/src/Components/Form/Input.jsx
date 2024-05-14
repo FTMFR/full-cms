@@ -22,7 +22,6 @@ const Input = (props) => {
   const [mainInput, dispatch] = useReducer(inputReducer, {
     value: "",
     isValid: false,
-    // console.log(),
   });
 
   const { value, isValid } = mainInput;
