@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
     if (localStorageData) {
-      fetch(`http://localhost:3000/v1/auth/me`, {
+      fetch(`http://localhost:4000/v1/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,6 +31,7 @@ function App() {
         .then((res) => res.json())
         .then((userData) => {
           setIsLoggedIn(true);
+          setToken(localStorageData);
           setUserInfos(userData);
         });
     }
