@@ -2,7 +2,6 @@ import regex from "./regex";
 import rules from "./rules";
 
 const validator = (value, validations) => {
-  console.log(value, validations);
 
   let validatorResults = [];
 
@@ -20,7 +19,6 @@ const validator = (value, validations) => {
       !regex.textEmail(value) && validatorResults.push(false);
     }
   }
-  console.log(validatorResults);
 
   if (validatorResults.length) {
     return false;

@@ -28,10 +28,16 @@ const Login = () => {
     },
     false
   );
-  
+
   const userLogin = (e) => {
     e.preventDefault();
-    console.log("User Login");
+
+    const userData = {
+      identifier: formState.inputs.username.value,
+      password: formState.inputs.password.value,
+    };
+
+    console.log(userData);
   };
   return (
     <>

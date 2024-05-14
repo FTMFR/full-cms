@@ -51,7 +51,6 @@ const Register = () => {
       confirmPassword: formState.inputs.password.value,
     };
 
-    console.log(formState.inputs.name);
 
     const requestOptions = {
       method: "POST",
@@ -61,7 +60,6 @@ const Register = () => {
       body: JSON.stringify(newUserInfos),
     };
 
-    console.log(newUserInfos, "newUserInfos");
 
     fetch("http://localhost:4000/v1/auth/register", requestOptions)
       .then((response) => response.json())
