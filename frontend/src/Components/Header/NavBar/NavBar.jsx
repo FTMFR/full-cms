@@ -5,6 +5,7 @@ import AuthContext from "../../context/authContext";
 
 const NavBar = () => {
   const authContext = useContext(AuthContext);
+  console.log(authContext);
 
   return (
     <div className="main-header">

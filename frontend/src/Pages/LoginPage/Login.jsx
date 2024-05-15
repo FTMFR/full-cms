@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./login.css";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
@@ -12,8 +12,11 @@ import {
   requiredValidator,
 } from "../../validators/rules";
 import { useForm } from "../../hooks/useForm";
+import AuthContext from "../../Components/context/authContext";
 
 const Login = () => {
+  const authContext = useContext(AuthContext);
+
   const [formState, onInputHandler] = useForm(
     {
       username: {
@@ -37,8 +40,34 @@ const Login = () => {
       password: formState.inputs.password.value,
     };
 
-    console.log(userData);
+    fetch(`http://localhost:4000/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => {
+        console.log(res);
+        if (!res.ok) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return res.json();
+        }
+      })
+      .then((result) => {
+        console.log(result);
+        authContext.login({}, result.accessToken);
+      })
+      .catch((error) => {
+        console.log("error =>", error);
+
+        alert("همچین کاربری وجود ندارد.");
+      });
   };
+
   return (
     <>
       <TopBar />
@@ -59,16 +88,12 @@ const Login = () => {
           <form action="#" className="login-form">
             <div className="login-form__username">
               <Input
-                id="email"
+                id="username"
                 element="input"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری یا آدرس ایمیل"
-                validations={[
-                  requiredValidator(),
-                  minValidator(8),
-                  emailValidator(),
-                ]}
+                validations={[requiredValidator(), minValidator(8)]}
                 onInputHandler={onInputHandler}
               />
               <i className="login-form__username-icon fa fa-user"></i>

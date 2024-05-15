@@ -25,14 +25,15 @@ function App() {
     if (localStorageData) {
       fetch(`http://localhost:4000/v1/auth/me`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorageData.token}`,
         },
       })
         .then((res) => res.json())
         .then((userData) => {
           setIsLoggedIn(true);
-          setToken(localStorageData);
+          // setToken(localStorageData.token);
           setUserInfos(userData);
+          console.log(userData);
         });
     }
   }, [login]);
