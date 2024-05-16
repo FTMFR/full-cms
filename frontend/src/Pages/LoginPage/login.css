@@ -46,7 +46,6 @@
   font-size: 2.2rem;
 }
 
-
 .login__subtitle {
   display: block;
   color: #7b868a;
@@ -107,12 +106,12 @@
   color: #ccc;
 }
 
-.login-form__btn-success{
-background-color: #2bce56;  
+.login-form__btn-success {
+  background-color: #2bce56;
 }
 
-.login-form__btn-error{
-background-color: red;  
+.login-form__btn-error {
+  background-color: red;
 }
 
 .login-form__btn {
@@ -169,3 +168,8 @@ background-color: red;
   margin-top: 1rem;
 }
 /* ============================== Login-Register Style ============================== */
+
+.swal-footer {
+  display: flex;
+  justify-content: center;
+}

@@ -3,7 +3,7 @@ import "./login.css";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import {
@@ -13,9 +13,11 @@ import {
 } from "../../validators/rules";
 import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../Components/context/authContext";
+import swal from "sweetalert";
 
 const Login = () => {
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [formState, onInputHandler] = useForm(
     {
@@ -59,12 +61,23 @@ const Login = () => {
       })
       .then((result) => {
         console.log(result);
+        swal({
+          title: "لاگین با موفقیت انجام شد.",
+          icon: "success",
+          button: "ورود به پنل",
+        }).then((value) => {
+          navigate("/");
+        });
         authContext.login({}, result.accessToken);
       })
       .catch((error) => {
         console.log("error =>", error);
 
-        alert("همچین کاربری وجود ندارد.");
+        swal({
+          title: "کاربری با این مشخصات یافت نشد.",
+          icon: "error",
+          button: "تلاش مجدد",
+        });
       });
   };
 
