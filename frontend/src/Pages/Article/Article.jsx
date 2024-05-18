@@ -4,7 +4,7 @@ import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
-import Comments from "../../Components/Comments/Comments";
+import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 
 const Article = () => {
   return (
@@ -231,7 +231,7 @@ const Article = () => {
                   </div>
                 </div>
 
-                <Comments />
+                <CommentsTextArea />
               </div>
             </div>
           </div>

@@ -113,7 +113,7 @@ const Login = () => {
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری یا آدرس ایمیل"
-                validations={[requiredValidator(), minValidator(8)]}
+                validations={[requiredValidator(), minValidator(3)]}
                 onInputHandler={onInputHandler}
               />
               <i className="login-form__username-icon fa fa-user"></i>
@@ -131,7 +131,10 @@ const Login = () => {
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
             <div className="login-form__password recaptcha-parent">
-              <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" onChange={onChange} />
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChange}
+              />
             </div>
 
             <Button

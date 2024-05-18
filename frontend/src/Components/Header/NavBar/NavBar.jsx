@@ -46,7 +46,7 @@ const NavBar = () => {
                               className="main-header__dropdown-item"
                             >
                               <Link
-                                to={`/course-info/${submneu.href}`}
+                                to={`${submneu.href}`}
                                 className="main-header__dropdown-link"
                               >
                                 {submneu.title}

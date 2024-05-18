@@ -1,14 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./courseInfo.css";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
 import CourseDetailBox from "../../Components/CourseDetailBox/CourseDetailBox";
-import Comments from "../../Components/Comments/Comments";
 import Accordion from "react-bootstrap/Accordion";
+import { Link, useParams } from "react-router-dom";
+import moment from "jalali-moment";
+import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 
 const CourseInfo = () => {
+  const [oneCourse, setOneCourse] = useState([]);
+  const [breadCrumb, setBreadCrumb] = useState([]);
+  const [creator, setCreator] = useState([]);
+  const [createdAt, setCreatedAt] = useState("");
+  const [updateAt, setUpdateAt] = useState("");
+  const [comments, setComment] = useState([]);
+  const [session, setSession] = useState([]);
+
+  const { courseName } = useParams();
+
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
+    fetch(`http://localhost:4000/v1/courses/${courseName}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${
+          localStorageData === null ? null : localStorageData.token
+        }`,
+      },
+    })
+      .then((res) => res.json())
+      .then((courseInfo) => {
+        setOneCourse(courseInfo);
+        setBreadCrumb(courseInfo.categoryID);
+        setCreator(courseInfo.creator);
+        setCreatedAt(courseInfo.createdAt);
+        setUpdateAt(courseInfo.updatedAt);
+        setComment(courseInfo.comments);
+        setSession(courseInfo.sessions);
+      });
+  }, []);
+
   return (
     <>
       <TopBar />
@@ -18,13 +52,13 @@ const CourseInfo = () => {
           { id: 1, title: "خانه", to: "" },
           {
             id: 2,
-            title: "آموزش برنامه نویسی فرانت اند",
-            to: "category-info/frontend",
+            title: `${breadCrumb.title}`,
+            to: `category-info/${breadCrumb.name}`,
           },
           {
             id: 3,
-            title: "دوره متخصص جاوا اسکریپت",
-            to: "course-info/js-expert",
+            title: `${oneCourse.name}`,
+            to: `course-info/${oneCourse.shortName}`,
           },
         ]}
       />
@@ -33,37 +67,29 @@ const CourseInfo = () => {
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <a href="/" className="course-info__link">
-                آموزش برنامه نویسی فرانت اند
-              </a>
-              <h1 className="course-info__title">
-                آموزش 20 کتابخانه جاوااسکریپت برای بازار کار
-              </h1>
-              <p className="course-info__text">
-                امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند.
-                به قدری که حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با
-                Vanilla Js پیاده سازی نمی کند و همیشه از کتابخانه ها و فریمورک
-                های موجود استفاده می کند. پس شما هم اگه میخواید یک برنامه نویس
-                عالی فرانت اند باشید، باید کتابخانه های کاربردی که در بازار کار
-                استفاده می شوند را به خوبی بلد باشید
-              </p>
+              <Link to="/" className="course-info__link">
+                آموزش {breadCrumb.title}
+              </Link>
+              <h1 className="course-info__title">{oneCourse.name}</h1>
+              <p className="course-info__text">{oneCourse.description}</p>
               <div className="course-info__social-media">
-                <a href="/" className="course-info__social-media-item">
+                <Link to="/" className="course-info__social-media-item">
                   <i className="fab fa-telegram-plane course-info__icon"></i>
-                </a>
-                <a href="/" className="course-info__social-media-item">
+                </Link>
+                <Link to="/" className="course-info__social-media-item">
                   <i className="fab fa-twitter course-info__icon"></i>
-                </a>
-                <a href="/" className="course-info__social-media-item">
+                </Link>
+                <Link to="/" className="course-info__social-media-item">
                   <i className="fab fa-facebook-f course-info__icon"></i>
-                </a>
+                </Link>
               </div>
             </div>
 
             <div className="col-6">
               <video
-                src=""
-                poster="/images/courses/js_project.png"
+                src={`../images/courses/${oneCourse.cover}`}
+                alt={oneCourse.name}
+                poster={`../images/courses/${oneCourse.cover}`}
                 className="course-info__video"
                 controls
               ></video>
@@ -82,32 +108,36 @@ const CourseInfo = () => {
                     <CourseDetailBox
                       icon="graduation-cap"
                       title="وضعیت دوره:"
-                      desc="به اتمام رسیده"
+                      desc={
+                        oneCourse.status === "start"
+                          ? "به اتمام رسیده"
+                          : "در حال برگزاری"
+                      }
                     />
                     <CourseDetailBox
                       icon="clock"
                       title=" مدت زمان دوره:"
-                      desc="19 ساعت"
+                      desc={`${oneCourse.price / 100000} ساعت`}
                     />
                     <CourseDetailBox
                       icon="calendar-alt"
-                      title="آخرین بروزرسانی:"
-                      desc="1401/03/02"
+                      title="شروع دوره :"
+                      desc={createdAt.slice(0, 10)}
                     />
                     <CourseDetailBox
                       icon="graduation-cap"
-                      title="وضعیت دوره:"
-                      desc="به اتمام رسیده"
+                      title="مدرس"
+                      desc={creator.name}
                     />
                     <CourseDetailBox
                       icon="clock"
-                      title=" مدت زمان دوره:"
-                      desc="19 ساعت"
+                      title="قیمت دوره"
+                      desc={oneCourse.price}
                     />
                     <CourseDetailBox
                       icon="calendar-alt"
                       title="آخرین بروزرسانی:"
-                      desc="1401/03/02"
+                      desc={updateAt.slice(0, 10)}
                     />
                   </div>
                 </div>
@@ -116,7 +146,7 @@ const CourseInfo = () => {
                   <div className="course-progress__header">
                     <i className="fas fa-chart-line course-progress__icon"></i>
                     <span className="course-progress__title">
-                      درصد پیشرفت دوره: 75%
+                      درصد پیشرفت دوره: {oneCourse.isComplete * 100}%
                     </span>
                   </div>
                   <div className="progress course-progress__bar">
@@ -127,7 +157,7 @@ const CourseInfo = () => {
                       aria-valuemax="100"
                       aria-valuemin="0"
                       aria-valuenow="75"
-                      style={{ width: "75%" }}
+                      style={{ width: `${oneCourse.isComplete * 100}%` }}
                     ></div>
                   </div>
                 </div>
@@ -135,10 +165,10 @@ const CourseInfo = () => {
                 <div className="introduction">
                   <div className="introduction__item">
                     <span className="introduction__title title">
-                      آموزش 20 کتابخانه جاوا اسکریپت مخصوص بازار کار
+                      {oneCourse.name}
                     </span>
                     <img
-                      src="/images/info/1.gif"
+                      src={`../images/courses/${oneCourse.cover}`}
                       alt="course info"
                       className="introduction__img img-fluid"
                     />
@@ -213,75 +243,27 @@ const CourseInfo = () => {
                     <Accordion defaultActiveKey="0">
                       <Accordion.Item eventKey="0" className="accordion">
                         <Accordion.Header>معرفی دوره</Accordion.Header>
-                        <Accordion.Body className="introduction__accordion-body">
-                          <div className="introduction__accordion-right">
-                            <span className="introduction__accordion-count">
-                              1
-                            </span>
-                            <i className="fab fa-youtube introduction__accordion-icon"></i>
-                            <a
-                              href="/"
-                              className="introduction__accordion-link"
-                            >
-                              معرفی دوره + چرا باید جاوا اسکریپت یاد بگیریم؟
-                            </a>
-                          </div>
-                          <div className="introduction__accordion-left">
-                            <span className="introduction__accordion-time">
-                              18:34
-                            </span>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-                      <Accordion.Item eventKey="1" className="accordion">
-                        <Accordion.Header>
-                          کلاس های مهم جاوا اسکریپت
-                        </Accordion.Header>
-                        <Accordion.Body className="introduction__accordion-body">
-                          <div className="introduction__accordion-right">
-                            <span className="introduction__accordion-count">
-                              2
-                            </span>
-                            <i className="fab fa-youtube introduction__accordion-icon"></i>
-                            <a
-                              href="/"
-                              className="introduction__accordion-link"
-                            >
-                              کتابخانه مهم برای کلاس گذاری در جاوا اسکریپت
-                            </a>
-                          </div>
-                          <div className="introduction__accordion-left">
-                            <span className="introduction__accordion-time">
-                              10:04
-                            </span>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-                      <Accordion.Item eventKey="2" className="accordion">
-                        <Accordion.Header>
-                          کتابخانه های مهم برای pagination
-                        </Accordion.Header>
-                        <Accordion.Body className="introduction__accordion-body">
-                          <div className="introduction__accordion-right">
-                            <span className="introduction__accordion-count">
-                              3
-                            </span>
-                            <i className="fab fa-youtube introduction__accordion-icon"></i>
-                            <a
-                              href="/"
-                              className="introduction__accordion-link"
-                            >
-                              چگونه کتابخانه مورد نیاز خود را پیدا کنیم؟
-                            </a>
-                          </div>
-                          <div className="introduction__accordion-left">
-                            <span className="introduction__accordion-time">
-                              21:42
-                            </span>
-                          </div>
-                        </Accordion.Body>
+                        {session.map((session, index) => (
+                          <Accordion.Body className="introduction__accordion-body">
+                            <div className="introduction__accordion-right">
+                              <span className="introduction__accordion-count">
+                                {index + 1}
+                              </span>
+                              <i className="fab fa-youtube introduction__accordion-icon"></i>
+                              <Link
+                                to="/"
+                                className="introduction__accordion-link"
+                              >
+                                {session.title}
+                              </Link>
+                            </div>
+                            <div className="introduction__accordion-left">
+                              <span className="introduction__accordion-time">
+                                {session.time}
+                              </span>
+                            </div>
+                          </Accordion.Body>
+                        ))}
                       </Accordion.Item>
                     </Accordion>
                   </div>
@@ -297,7 +279,7 @@ const CourseInfo = () => {
                       />
                       <div className="techer-details__header-titles">
                         <a href="/" className="techer-details__header-link">
-                          محمدامین سعیدی راد
+                          {creator.name}
                         </a>
                         <span className="techer-details__header-skill">
                           Front End & Back End Developer
@@ -316,7 +298,7 @@ const CourseInfo = () => {
                   </p>
                 </div>
 
-                <Comments />
+                <CommentsTextArea comments={comments} />
               </div>
             </div>
 
@@ -324,10 +306,17 @@ const CourseInfo = () => {
               <div className="courses-info">
                 <div className="course-info">
                   <div className="course-info__register">
-                    <span className="course-info__register-title">
-                      <i className="fas fa-graduation-cap course-info__register-icon"></i>{" "}
-                      دانشجوی دوره هستید
-                    </span>
+                    {oneCourse.isUserRegisteredToThisCourse ? (
+                      <span className="course-info__register-title">
+                        <i className="fas fa-graduation-cap course-info__register-icon"></i>{" "}
+                        دانشجوی دوره هستید
+                      </span>
+                    ) : (
+                      <span className="course-info__register-title">
+                        <i className="fas fa-graduation-cap course-info__register-icon"></i>{" "}
+                        ثبت نام در دوره
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="course-info">
@@ -340,7 +329,7 @@ const CourseInfo = () => {
                           تعداد دانشجو:{" "}
                         </span>
                         <span className="course-info__total-sale-number">
-                          178
+                          {oneCourse.courseStudentsCount}
                         </span>
                       </div>
                     </div>
@@ -348,7 +337,7 @@ const CourseInfo = () => {
                       <div className="course-info__total-comment">
                         <i className="far fa-comments course-info__total-comment-icon"></i>
                         <span className="course-info__total-comment-text">
-                          67 دیدگاه
+                          {comments.length} دیدگاه
                         </span>
                       </div>
                       <div className="course-info__total-view">
