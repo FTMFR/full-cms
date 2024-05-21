@@ -7,8 +7,8 @@ import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
 import CourseDetailBox from "../../Components/CourseDetailBox/CourseDetailBox";
 import Accordion from "react-bootstrap/Accordion";
 import { Link, useParams } from "react-router-dom";
-import moment from "jalali-moment";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
+import swal from "sweetalert";
 
 const CourseInfo = () => {
   const [oneCourse, setOneCourse] = useState([]);
@@ -18,16 +18,18 @@ const CourseInfo = () => {
   const [updateAt, setUpdateAt] = useState("");
   const [comments, setComment] = useState([]);
   const [session, setSession] = useState([]);
+  const [newCommentBody,setNewCommentBody] = useState('')
 
   const { courseName } = useParams();
 
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
+
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${
-          localStorageData === null ? null : localStorageData.token
+          localStorageData.token === null ? null : localStorageData.token
         }`,
       },
     })
@@ -40,8 +42,35 @@ const CourseInfo = () => {
         setUpdateAt(courseInfo.updatedAt);
         setComment(courseInfo.comments);
         setSession(courseInfo.sessions);
+        console.log(comments);
       });
   }, []);
+
+  const submitComment = (newCommentBody) => {
+    const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
+
+    fetch("http://localhost:4000/v1/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+      body: JSON.stringify({
+        body: newCommentBody,
+        courseShortName: courseName,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        swal({
+          title: "کامنت مورد نظر با موفقیت ثبت شد.",
+          icon: "success",
+          buttons: "تایید",
+        });
+        console.log(result);
+        setNewCommentBody('')
+      });
+  };
 
   return (
     <>
@@ -244,7 +273,10 @@ const CourseInfo = () => {
                       <Accordion.Item eventKey="0" className="accordion">
                         <Accordion.Header>معرفی دوره</Accordion.Header>
                         {session.map((session, index) => (
-                          <Accordion.Body className="introduction__accordion-body">
+                          <Accordion.Body
+                            className="introduction__accordion-body"
+                            key={index}
+                          >
                             <div className="introduction__accordion-right">
                               <span className="introduction__accordion-count">
                                 {index + 1}
@@ -298,7 +330,11 @@ const CourseInfo = () => {
                   </p>
                 </div>
 
-                <CommentsTextArea comments={comments} />
+                <CommentsTextArea
+                  comments={comments}
+                  submitComment={submitComment}
+                  creator={creator}
+                />
               </div>
             </div>
 

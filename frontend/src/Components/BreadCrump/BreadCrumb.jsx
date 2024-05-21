@@ -11,8 +11,8 @@ const BreadCrumb = ({ links }) => {
             <i className="fas fa-home breadcrumb__home-icon"></i>
           </div>
           <ul className="breadcrumb__list">
-            {links.map((link) => (
-              <li className="breadcrumb__item" key={link.key}>
+            {links.map((link,index) => (
+              <li className="breadcrumb__item" key={index}>
                 <Link to={`/${link.to}`} className="breadcrumb__link">
                   {link.title}
                   {link.id !== links.length ? (
