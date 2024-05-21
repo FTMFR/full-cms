@@ -14,6 +14,10 @@ const schema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    support: {
+      type: String,
+      required: false,
+    },
     shortName: {
       type: String,
       required: true,

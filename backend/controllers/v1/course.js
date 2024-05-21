@@ -15,6 +15,7 @@ exports.create = async (req, res) => {
     creator: req.user._id,
     categoryID,
     isComplete: 0,
+    support: 'گروه تلگرامی',
     cover: "images/courses/js.jpeg",
   });
 
@@ -39,18 +40,22 @@ exports.getOne = async (req, res) => {
     .lean();
 
   const sessions = await sessionModel.find({ course: course._id }).lean();
-  const comments = await commentModel.find({ course: course._id }).lean();
+  const comments = await commentModel.find({ course: course._id }).populate('creator').lean();
 
   const courseStudentsCount = await courseUserModel
     .find({
       course: course._id,
     })
     .count();
-
-  const isUserRegisteredToThisCourse = !!(await courseUserModel.findOne({
-    user: req.user._id,
-    course: course._id,
-  }));
+    let isUserRegisteredToThisCourse = null
+  if (req.user) {
+    isUserRegisteredToThisCourse = !!(await courseUserModel.findOne({
+      user: req.user._id,
+      course: course._id,
+    }));
+  } else {
+    isUserRegisteredToThisCourse = false;
+  }
 
   return res.json({
     ...course,
@@ -62,10 +67,11 @@ exports.getOne = async (req, res) => {
 };
 
 exports.createSession = async (req, res) => {
-  const { title } = req.body;
+  const { title, time } = req.body;
 
   const session = await sessionModel.create({
     title,
+    time,
     course: req.params.id,
   });
 

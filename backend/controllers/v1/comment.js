@@ -5,10 +5,7 @@ const courseModel = require("../../models/course");
 exports.create = async (req, res) => {
   const { body, courseShortName } = req.body;
 
-  console.log(body, courseShortName, req.user._id);
   const course = await courseModel.findOne({ shortName: courseShortName });
-
-  console.log(course);
 
   const comment = await commentModel.create({
     body,
@@ -16,7 +13,7 @@ exports.create = async (req, res) => {
     creator: req.user._id,
   });
 
-    return res.status(201).json(comment);
+  return res.status(201).json(comment);
 };
 
 // exports.getAll = async (req, res) => {

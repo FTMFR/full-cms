@@ -6,6 +6,10 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    time: {
+      type: String,
+      required: true,
+    },
     course: {
       type: mongoose.Types.ObjectId,
       ref: 'Course',
