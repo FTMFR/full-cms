@@ -33,7 +33,7 @@ function App() {
           setIsLoggedIn(true);
           // setToken(localStorageData.token);
           setUserInfos(userData);
-          console.log(userData);
+          // console.log(userData);
         });
     }
   }, [login]);

@@ -29,4 +29,6 @@ router.route("/:shortName").post(loginUser, courseController.getOne);
 
 router.route("/:id/register").post(courseController.register);
 
+router.route('/category/:categoryName').get(courseController.getCategoryCourses)
+
 module.exports = router;
