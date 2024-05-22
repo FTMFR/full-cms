@@ -11,17 +11,17 @@ const CourseBox = (props) => {
   };
 
   const onImageError = (error) => {
-    console.log(error);
+    // console.log(error);
   };
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className="col-4">
       <div className="course-box">
         <Link to={`/course-info/${props.shortName}`}>
           <img
-            src={`./images/courses/${props.cover}`}
+            src={`../images/courses/fareelancer.png`}
             alt="Course img"
             className="course-box__img"
             onLoad={onImageLoader}

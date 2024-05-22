@@ -12,7 +12,7 @@ const NavBar = () => {
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setAllNavbarLinks(data);
       });
   }, []);
