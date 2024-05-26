@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./courses.css";
 import TopBar from "./../../Components/Header/TopBar/TopBar";
 import NavBar from "./../../Components/Header/NavBar/NavBar";
@@ -7,6 +7,17 @@ import Footer from "./../../Components/Footer/Footer";
 import CourseBox from "./../../Components/CourseBox/CourseBox";
 
 const Courses = () => {
+  const [allCourse, setAllCourse] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/v1/courses")
+      .then((res) => res.json())
+      .then((result) => {
+        setAllCourse(result);
+        console.log(allCourse);
+      });
+  }, []);
+
   return (
     <>
       <TopBar />
@@ -28,13 +39,9 @@ const Courses = () => {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                <CourseBox />
-                <CourseBox />
-                <CourseBox />
-                <CourseBox />
-                <CourseBox />
-                <CourseBox />
-                <CourseBox />
+                {allCourse.map((course) => (
+                  <CourseBox {...course} key={course._id} />
+                ))}
               </div>
             </div>
           </div>
