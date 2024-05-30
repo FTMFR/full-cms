@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
     price,
     isComplete: 0,
     support: "گروه تلگرامی",
-    cover: "images/courses/js.jpeg",
+    cover: "/images/courses/fareelancer.png",
   });
 
   const populatedCourse = await courseModel
