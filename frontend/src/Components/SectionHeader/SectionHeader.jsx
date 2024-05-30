@@ -12,7 +12,7 @@ const SectionHeader = ({ title, desc, btnTitle, href }) => {
         </div>
         {btnTitle ? (
           <div className="courses-header__left">
-            <Link to={`/${href}`} className="courses-header__link">
+            <Link to={`${href}`} className="courses-header__link">
               {btnTitle}
               <i className="fas fa-arrow-left courses-header__icon"></i>
             </Link>

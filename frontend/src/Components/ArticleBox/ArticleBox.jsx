@@ -1,27 +1,30 @@
 import React from "react";
 import "./articleBox.css";
+import { Link } from "react-router-dom";
 
-const ArticleBox = ({ title, desc, cover }) => {
+const ArticleBox = (props) => {
   return (
     <div className="col-4">
       <div className="article-card">
         <div className="article-card__header">
-          <a href="/" className="article-card__link-img">
+          <Link to={`/article-info/${props.shortName}`} className="article-card__link-img">
             <img
-              src={cover}
+              src={`../images/blog/${props.cover}`}
               className="article-card__img"
               alt="article cover"
             />
-          </a>
+          </Link>
         </div>
-        <div className="srticle-card__content">
-          <a href="/" className="article-card__link">
-            {title}
-          </a>
-          <p className="article-card_text">{desc}</p>
-          <a href="/" className="article-card__btn">
+        <div className="article-card__content">
+          <Link to={`/article-info/${props.shortName}`} className="article-card__link">
+            {props.title}
+          </Link>
+          <p className="article-card_text">{props.description}</p>
+          <button className="article-card__btn">
+            <Link to={`/article-info/${props.shortName}`}>
             بیشتر بخوانید ...
-          </a>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

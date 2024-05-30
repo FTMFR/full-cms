@@ -5,12 +5,14 @@ import Article from "./Pages/Article/Article";
 import Courses from "./Pages/Courses/Courses";
 import Login from "./Pages/LoginPage/Login";
 import Register from "./Pages/Register/Register";
+import AllArticle from "./Pages/AllArticle/AllArticle";
 
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
   { path: "/category-info/:categoryName/:page", element: <Category /> },
   { path: "/article-info/:articleName", element: <Article /> },
+  { path: "/articles/:page", element: <AllArticle /> },
   { path: "/courses/:page", element: <Courses /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },

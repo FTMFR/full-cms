@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./article.css";
 import TopBar from "../../Components/Header/TopBar/TopBar";
 import NavBar from "../../Components/Header/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
+import { useParams } from "react-router-dom";
 
 const Article = () => {
+  const [articleDetails, setArticleDetails] = useState({});
+  const { articleName } = useParams();
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/articles/${articleName}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setArticleDetails(result);
+        console.log(result);
+      });
+  }, []);
+
   return (
     <>
       <TopBar />
@@ -27,31 +40,28 @@ const Article = () => {
       <div className="main">
         <div className="container">
           <div className="row">
-            <div className="col-8">
+            <div className="col-12">
               <div className="article">
-                <h1 className="article__title">
-                  معرفی بهترین سایت آموزش جاوا اسکریپت | تجربه محور + آموزش
-                  رایگان
-                </h1>
+                <h1 className="article__title">{articleDetails.title}</h1>
                 <div className="article__header">
                   <div className="article-header__category article-header__item">
                     <i className="far fa-folder article-header__icon"></i>
                     <a href="/" className="article-header__text">
-                      جاوا اسکریپت
+                      {articleDetails.categoryID.title}
                     </a>
                   </div>
 
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
                     <a href="/" className="article-header__text">
-                      ارسال شده توسط فاطمه
+                      {articleDetails.creator.name}
                     </a>
                   </div>
 
                   <div className="article-header__category article-header__item">
                     <i className="far fa-eye article-header__icon"></i>
                     <a href="/" className="article-header__text">
-                      بازدید 12.4k{" "}
+                      12.4k{" "}
                     </a>
                   </div>
                 </div>
@@ -92,6 +102,8 @@ const Article = () => {
                   <span className="article__score-text">امتیاز 5 - 4.2/5</span>
                 </div>
                 <p className="article__paragraph paragraph">
+                  {articleDetails.body}
+                  <br />
                   adipisicing elit. Obcaecati nam, mollitia dicta consequatur
                   culpa voluptas voluptatum officiis asperiores neque maiores
                   impedit! Praesentium, maiores? Quam, optio laborum! Saepe, non
@@ -113,6 +125,7 @@ const Article = () => {
                     </li>
                     <li className="article-read__item">
                       <a href="/" className="article-read__link">
+                        {articleDetails.description}
                         راه آسان تر، دوره های جاوا اسکریپت آکادمی سبزلرن
                       </a>
                     </li>
@@ -231,7 +244,7 @@ const Article = () => {
                   </div>
                 </div>
 
-                <CommentsTextArea />
+                {/* <CommentsTextArea /> */}
               </div>
             </div>
           </div>
