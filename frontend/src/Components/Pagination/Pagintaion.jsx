@@ -46,7 +46,7 @@ const Pagintaion = ({ items, itemCount, pathname, setShowCourses }) => {
                 <Link
                   to={`${pathname}/${index + 1}`}
                   className="courses__pagination-link courses__pagination-link--active"
-                  // onClick={() => clickHandler(index)} 
+                  onClick={() => clickHandler(index)}
                 >
                   {index + 1}
                 </Link>
@@ -54,7 +54,7 @@ const Pagintaion = ({ items, itemCount, pathname, setShowCourses }) => {
                 <Link
                   to={`${pathname}/${index + 1}`}
                   className="courses__pagination-link"
-                  // onClick={() => clickHandler(index)}
+                  onClick={() => clickHandler(index)}
                 >
                   {index + 1}
                 </Link>

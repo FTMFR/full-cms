@@ -16,9 +16,11 @@ const Courses = () => {
       .then((res) => res.json())
       .then((result) => {
         setAllCourse(result);
-        console.log(allCourse);
+        console.log(result);
       });
   }, []);
+
+  console.log(allCourse);
 
   return (
     <>

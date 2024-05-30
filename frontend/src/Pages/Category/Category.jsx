@@ -9,22 +9,20 @@ import NavBar from "../../Components/Header/NavBar/NavBar";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
-  const [shownCourses, setShownCourses] = useState([]);
+  const [showCourses, setShowCourses] = useState([]);
   const { categoryName } = useParams();
 
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
       .then((result) => {
-        if (result) {
-          console.log(result);
-          setCategory(result);
-        } else {
-          setCategory("");
-        }
+        console.log(result);
+        setCategory(result);
       })
       .catch((err) => setCategory("هیچ دوره ای یافت نشد"));
   }, [categoryName]);
+
+  console.log(category);
 
   return (
     <>
@@ -88,17 +86,16 @@ const Category = () => {
                         </form>
                       </div>
                     </div>
-                    
-                    {shownCourses.map((course) => (
+
+                    {showCourses.map((course) => (
                       <CourseBox {...course} key={course._id} />
                     ))}
-
 
                     <Pagintaion
                       items={category}
                       itemCount={3}
                       pathname={`/category-info/${categoryName}`}
-                      setShowCourses={setShownCourses}
+                      setShowCourses={setShowCourses}
                     />
                   </>
                 )}
