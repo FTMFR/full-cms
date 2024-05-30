@@ -18,7 +18,7 @@ const CourseInfo = () => {
   const [updateAt, setUpdateAt] = useState("");
   const [comments, setComment] = useState([]);
   const [session, setSession] = useState([]);
-  const [newCommentBody,setNewCommentBody] = useState('')
+  const [newCommentBody, setNewCommentBody] = useState("");
 
   const { courseName } = useParams();
 
@@ -68,7 +68,7 @@ const CourseInfo = () => {
           buttons: "تایید",
         });
         console.log(result);
-        setNewCommentBody('')
+        setNewCommentBody("");
       });
   };
 
@@ -305,7 +305,7 @@ const CourseInfo = () => {
                   <div className="techer-details__header">
                     <div className="techer-details__header-right">
                       <img
-                        src="/images/info/teacher.jfif"
+                        src={`..${creator.profile}`}
                         alt="Teacher Profile"
                         className="techer-details__header-img"
                       />
@@ -314,7 +314,7 @@ const CourseInfo = () => {
                           {creator.name}
                         </a>
                         <span className="techer-details__header-skill">
-                          Front End & Back End Developer
+                          {creator.role}
                         </span>
                       </div>
                     </div>

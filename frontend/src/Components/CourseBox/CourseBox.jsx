@@ -37,9 +37,9 @@ const CourseBox = (props) => {
           <div className="course-box__rating-teacher">
             <div className="course-box__teacher">
               <i className="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-              <a href="/" className="course-box__teacher-link">
+              <Link to="/" className="course-box__teacher-link">
                 {props.creator.name}
-              </a>
+              </Link>
             </div>
             <div className="course-box__rating">
               <img

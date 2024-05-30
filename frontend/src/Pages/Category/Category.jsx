@@ -9,6 +9,7 @@ import NavBar from "../../Components/Header/NavBar/NavBar";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
+  const [shownCourses, setShownCourses] = useState([]);
   const { categoryName } = useParams();
 
   useEffect(() => {
@@ -87,10 +88,18 @@ const Category = () => {
                         </form>
                       </div>
                     </div>
-                    {category.splice(0, 3).map((course) => (
+                    
+                    {shownCourses.map((course) => (
                       <CourseBox {...course} key={course._id} />
                     ))}
-                    <Pagintaion />
+
+
+                    <Pagintaion
+                      items={category}
+                      itemCount={3}
+                      pathname={`/category-info/${categoryName}`}
+                      setShowCourses={setShownCourses}
+                    />
                   </>
                 )}
               </div>
