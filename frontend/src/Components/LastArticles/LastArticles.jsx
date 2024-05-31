@@ -11,7 +11,7 @@ const LastArticles = () => {
       .then((res) => res.json())
       .then((result) => {
         setArticles(result);
-        console.log(result);
+        // console.log(result);
       });
   }, []);
 

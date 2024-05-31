@@ -17,7 +17,7 @@ const CourseBox = (props) => {
   // console.log(props);
 
   return (
-    <div className="col-4">
+    <div className="col-4" style={{width: `${props.isSlider && '100%'}`}}>
       <div className="course-box">
         <Link to={`/course-info/${props.shortName}`}>
           <img

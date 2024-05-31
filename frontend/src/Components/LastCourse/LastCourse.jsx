@@ -11,7 +11,7 @@ const LastCourse = () => {
       .then((res) => res.json())
       .then((result) => {
         setAllCourse(result);
-        console.log(allCourse);
+        // console.log(allCourse);
       });
   }, []);
 
