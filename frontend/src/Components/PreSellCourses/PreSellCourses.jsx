@@ -13,7 +13,7 @@ const PreSellCourses = () => {
     fetch("http://localhost:4000/v1/courses/presell")
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setAllPreSells(result);
       });
   }, []);
@@ -24,14 +24,13 @@ const PreSellCourses = () => {
         <SectionHeader
           title="دوره های در حال پیش فروش"
           desc="متن تستی برای توضیحات دروه های پیش فروش"
+          btnTitle="تمامی دوره ها"
+          href="/presellCourses/1"
         />
         <div className="course-content">
           <div className="container">
             <div className="row">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={3}
-              >
+              <Swiper spaceBetween={50} slidesPerView={3}>
                 {allPreSells.map((presell, index) => (
                   <SwiperSlide key={index}>
                     <CourseBox {...presell} isSlider={true} />

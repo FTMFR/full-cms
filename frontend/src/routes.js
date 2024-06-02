@@ -6,6 +6,9 @@ import Courses from "./Pages/Courses/Courses";
 import Login from "./Pages/LoginPage/Login";
 import Register from "./Pages/Register/Register";
 import AllArticle from "./Pages/AllArticle/AllArticle";
+import Popular from "./Pages/Popular/Popular";
+import Presell from "./Pages/PreSell/PreSell";
+
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -14,6 +17,8 @@ const routes = [
   { path: "/article-info/:articleName", element: <Article /> },
   { path: "/articles/:page", element: <AllArticle /> },
   { path: "/courses/:page", element: <Courses /> },
+  { path: "/popularCourses/:page", element: <Popular /> },
+  { path: "/presellCourses/:page", element: <Presell /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
 ];
