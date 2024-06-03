@@ -9,10 +9,10 @@ function App() {
   const [token, setToken] = useState(null);
   const [userInfos, setUserInfos] = useState(null);
 
-  const login = useCallback((userInfos, token) => {
+  const login = (userInfos, token) => {
     setToken(token);
     localStorage.setItem("User-Token", JSON.stringify({ token }));
-  }, []);
+  };
 
   const logout = () => {
     setToken(null);
