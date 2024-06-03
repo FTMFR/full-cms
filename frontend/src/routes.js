@@ -8,7 +8,7 @@ import Register from "./Pages/Register/Register";
 import AllArticle from "./Pages/AllArticle/AllArticle";
 import Popular from "./Pages/Popular/Popular";
 import Presell from "./Pages/PreSell/PreSell";
-
+import Contact from "./Pages/Contact/Contact";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -21,6 +21,7 @@ const routes = [
   { path: "/presellCourses/:page", element: <Presell /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
+  { path: "/contact", element: <Contact /> },
 ];
 
 export default routes;
