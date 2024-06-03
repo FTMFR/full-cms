@@ -1,6 +1,7 @@
 import React from "react";
 import "./footer.css";
 import FooterItem from "../FooterItem/FooterItem";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,11 +15,10 @@ const Footer = () => {
                 یادگیری داشتم، کمبود آموزش های خوب با پشتیبانی قابل قبول بود که
                 باعث شد اونموقع تصمیم بگیرم اگر روزی توانایی مالی و فنی قابل
                 قبولی داشتم یک وب سایت برای حل این مشکل راه اندازی کنم که خب
-                امروز آکادمی آموزش برنامه نویسی به عنوان یک آکادمی خصوصی
-                فعالیت میکنه و این به این معنی است که هر مدرسی اجازه تدریس در
-                اون رو نداره و باید از فیلترینگ های خاص آکادمی رد شه این
-                به این معنی است که ما برامون فن بیان و نحوه تعامل مدرس با دانشجو
-                بسیار مهمه!
+                امروز آکادمی آموزش برنامه نویسی به عنوان یک آکادمی خصوصی فعالیت
+                میکنه و این به این معنی است که هر مدرسی اجازه تدریس در اون رو
+                نداره و باید از فیلترینگ های خاص آکادمی رد شه این به این معنی
+                است که ما برامون فن بیان و نحوه تعامل مدرس با دانشجو بسیار مهمه!
               </p>
             </FooterItem>
 
@@ -74,8 +74,18 @@ const Footer = () => {
                 </div>
                 <div className="col-6">
                   <a href="/" className="footer-widgets__link">
-                    آموزش BOOTSTRAP
+                    درباره ما
                   </a>
+                </div>
+                <div className="col-6">
+                  <Link to="/newsLetter" className="footer-widgets__link">
+                    اشتراک در خبرنامه
+                  </Link>
+                </div>
+                <div className="col-6">
+                  <Link to="/contact" className="footer-widgets__link">
+                    ارتباط با ما
+                  </Link>
                 </div>
               </div>
             </FooterItem>
