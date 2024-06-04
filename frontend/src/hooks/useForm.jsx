@@ -12,7 +12,6 @@ const formReducer = (state, action) => {
         }
       }
 
-      console.log(action.isValid, "useForm");
 
       return {
         ...state,

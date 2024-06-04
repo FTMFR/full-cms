@@ -9,6 +9,7 @@ import AllArticle from "./Pages/AllArticle/AllArticle";
 import Popular from "./Pages/Popular/Popular";
 import Presell from "./Pages/PreSell/PreSell";
 import Contact from "./Pages/Contact/Contact";
+import Search from "./Pages/Search/Search";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -22,6 +23,7 @@ const routes = [
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/contact", element: <Contact /> },
+  { path: "/search/:value", element: <Search /> },
 ];
 
 export default routes;

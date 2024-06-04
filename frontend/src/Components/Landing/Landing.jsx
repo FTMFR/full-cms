@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./landing.css";
 import Typewriter from "typewriter-effect";
 import LandingCounter from "../LandingCounter/LandingCounter";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <section className="landing">
       <div className="container">
@@ -21,12 +24,23 @@ const Landing = () => {
         </h2>
         <div className="landing__searchbar">
           <input
+            // element="input"
             type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            // id="search"
             className="landing__searchbar-input"
             placeholder="چه چیزی دوست داری یاد بگیری ..."
+            // onInputHandler={onInputHandler}
           />
-          <button className="landing__searchbar-btn" type="submit">
-            <i className="fas fa-search landing__searchbar-icon"></i>
+          <button
+            className="landing__searchbar-btn"
+            type="submit"
+            // onClick={searchInputHandler}
+          >
+            <Link to={`${searchValue.length? `/search/${searchValue}`: '/'}`}>
+              <i className="fas fa-search landing__searchbar-icon"></i>
+            </Link>
           </button>
         </div>
         <div className="landing-status">
