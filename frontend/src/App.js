@@ -36,7 +36,10 @@ function App() {
           // console.log(userData);
         });
     }
-  }, [login]);
+    else {
+      setIsLoggedIn(false)
+    }
+  }, [login,logout]);
 
   const router = useRoutes(routes);
 

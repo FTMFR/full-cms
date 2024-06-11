@@ -79,7 +79,7 @@ export default function Topbar() {
                 </a>
               </div>
               <div className="home-profile-name">
-                <a href="/">{admin.username}</a>
+                <a href="/">{admin.name}</a>
               </div>
               <div className="home-profile-icon">
                 <i className="fas fa-angle-down"></i>
