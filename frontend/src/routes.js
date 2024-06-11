@@ -10,6 +10,11 @@ import Popular from "./Pages/Popular/Popular";
 import Presell from "./Pages/PreSell/PreSell";
 import Contact from "./Pages/Contact/Contact";
 import Search from "./Pages/Search/Search";
+import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+import Users from "./Pages/AdminPanel/Users/Users";
+import AdminCourses from "./Pages/AdminPanel/AdminCourses/AdminCourses";
+import AdminArticle from "./Pages/AdminPanel/AdminArticle/AdminArticle";
+import Menus from "./Pages/AdminPanel/Menus/Menus";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -24,6 +29,16 @@ const routes = [
   { path: "/register", element: <Register /> },
   { path: "/contact", element: <Contact /> },
   { path: "/search/:value", element: <Search /> },
+  {
+    path: "/p-admin",
+    element: <AdminPanel />,
+    children: [
+      { path: "users", element: <Users /> },
+      { path: "courses", element: <AdminCourses /> },
+      { path: "articles", element: <AdminArticle /> },
+      { path: "menus", element: <Menus /> },
+    ],
+  },
 ];
 
 export default routes;

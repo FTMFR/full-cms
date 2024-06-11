@@ -226,68 +226,83 @@ const Category = () => {
                         ) : (
                           <>
                             {showCourses.map((course) => (
-                              <div class="col-12">
-                                <div class="course-box">
-                                  <div class="course__box-header">
-                                    <div class="course__box-right">
+                              <div className="col-12">
+                                <div className="course-box">
+                                  <div className="course__box-header">
+                                    <div className="course__box-right">
                                       <a
-                                        class="course__box-right-link"
+                                        className="course__box-right-link"
                                         href="/"
                                       >
                                         <img
                                           src="/images/courses/fareelancer.png"
-                                          class="course__box-right-img"
+                                          className="course__box-right-img"
                                           alt="fareelancer"
                                         />
                                       </a>
                                     </div>
-                                    <div class="course__box-left">
-                                      <div class="course__box-left-top">
+                                    <div className="course__box-left">
+                                      <div className="course__box-left-top">
                                         <a
                                           href="/"
-                                          class="course__box-left-link"
+                                          className="course__box-left-link"
                                         >
                                           {course.name}
                                         </a>
                                       </div>
-                                      <div class="course__box-left-center">
-                                        <div class="course__box-left-teacher">
-                                          <i class="course__box-left-icon fa fa-chalkboard-teacher"></i>
-                                          <span class="course__box-left-name">
+                                      <div className="course__box-left-center">
+                                        <div className="course__box-left-teacher">
+                                          <i className="course__box-left-icon fa fa-chalkboard-teacher"></i>
+                                          <span className="course__box-left-name">
                                             محمد امین سعیدی راد
                                           </span>
                                         </div>
-                                        <div class="course__box-left-stars">
-                                          <span class="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" alt="star" />
+                                        <div className="course__box-left-stars">
+                                          <span className="course__box-left-star">
+                                            <img
+                                              src="/images/svgs/star_fill.svg"
+                                              alt="star"
+                                            />
                                           </span>
-                                          <span class="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" alt="star"/>
+                                          <span className="course__box-left-star">
+                                            <img
+                                              src="/images/svgs/star_fill.svg"
+                                              alt="star"
+                                            />
                                           </span>
-                                          <span class="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" alt="star" />
+                                          <span className="course__box-left-star">
+                                            <img
+                                              src="/images/svgs/star_fill.svg"
+                                              alt="star"
+                                            />
                                           </span>
-                                          <span class="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" alt="star"/>
+                                          <span className="course__box-left-star">
+                                            <img
+                                              src="/images/svgs/star_fill.svg"
+                                              alt="star"
+                                            />
                                           </span>
-                                          <span class="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" alt="star"/>
+                                          <span className="course__box-left-star">
+                                            <img
+                                              src="/images/svgs/star_fill.svg"
+                                              alt="star"
+                                            />
                                           </span>
                                         </div>
                                       </div>
-                                      <div class="course__box-left-bottom">
-                                        <div class="course__box-left-des">
+                                      <div className="course__box-left-bottom">
+                                        <div className="course__box-left-des">
                                           <p>{course.description}</p>
                                         </div>
                                       </div>
-                                      <div class="course__box-footer">
-                                        <div class="course__box-footer-right">
-                                          <i class="course__box-footer-icon fa fa-users"></i>
-                                          <span class="course__box-footer-count">
+                                      <div className="course__box-footer">
+                                        <div className="course__box-footer-right">
+                                          <i className="course__box-footer-icon fa fa-users"></i>
+                                          <span className="course__box-footer-count">
                                             202
                                           </span>
                                         </div>
-                                        <span class="course__box-footer-left">
+                                        <span className="course__box-footer-left">
                                           {course.price === 0
                                             ? "رایگان"
                                             : course.price.toLocaleString()}
