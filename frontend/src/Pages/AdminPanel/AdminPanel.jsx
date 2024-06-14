@@ -11,9 +11,12 @@ const AdminPanel = () => {
         <SideBar />
         <div id="home" className="col-10">
           <Topbar />
+
+          <div className="container-fluid" id="home-content">
+            <Outlet />
+          </div>
         </div>
       </div>
-      <Outlet />
     </>
   );
 };
