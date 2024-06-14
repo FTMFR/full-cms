@@ -57,6 +57,30 @@ const Users = () => {
       });
     });
   };
+  
+  const banHandler = (id) => {
+    swal({
+      title: "آیا از بن مطمئن هستید؟",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
+    }).then((result) => {
+      fetch(`http://localhost:4000/v1/users/ban/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localDataToken.token}`,
+        },
+      }).then((res) => {
+        if (res.ok) {
+          swal({
+            title: "این کاربر با موفقیت بن شد",
+            icon: "success",
+            buttons: "ok",
+          })
+        }
+      });
+    });
+    console.log(id);
+  };
 
   return (
     <>
@@ -74,8 +98,8 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {usersData.map((user) => (
-              <tr key={user._id}>
+            {usersData.map((user, index) => (
+              <tr key={index}>
                 <td>{splitWordAtSpace(user.name)[0]}</td>
                 <td>{splitWordAtSpace(user.name)[1]}</td>
                 <td>{user.phone}</td>
@@ -96,7 +120,11 @@ const Users = () => {
                   </button>
                 </td>
                 <td>
-                  <button type="button" className="btn btn-warning edit-btn">
+                  <button
+                    type="button"
+                    className="btn btn-warning edit-btn"
+                    onClick={() => banHandler(user._id)}
+                  >
                     بن
                   </button>
                 </td>
