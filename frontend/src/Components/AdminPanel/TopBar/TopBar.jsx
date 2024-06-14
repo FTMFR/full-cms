@@ -54,14 +54,11 @@ export default function Topbar() {
             <div className="home-notification-modal">
               <ul className="home-notification-modal-list">
                 {admin.notifications ? (
-                  admin.notifications.map((notifs) => (
-                    <li className="home-notification-modal-item">
+                  admin.notifications.map((notifs, index) => (
+                    <li className="home-notification-modal-item" key={index}>
                       <span className="home-notification-modal-text">
                         {notifs}
                       </span>
-                      {/* <label className="switch">
-                        <a href="javascript:void(0)" onClick={()=>setNotifsID(notifs._id)}>دیدم</a>
-                      </label> */}
                     </li>
                   ))
                 ) : (
