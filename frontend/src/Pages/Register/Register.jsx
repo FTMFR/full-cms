@@ -14,6 +14,7 @@ import {
   maxValidator,
 } from "../../validators/rules";
 import AuthContext from "../../Components/context/authContext";
+import swal from "sweetalert";
 
 const Register = () => {
   const authContext = useContext(AuthContext);
@@ -51,25 +52,35 @@ const Register = () => {
       name: formState.inputs.name.value,
       username: formState.inputs.username.value,
       email: formState.inputs.email.value,
-      email: formState.inputs.phone.value,
+      phone: formState.inputs.phone.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
     };
 
-
-    const requestOptions = {
+    fetch(`http://localhost:4000/v1/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUserInfos),
-    };
-
-
-    fetch("http://localhost:4000/v1/auth/register", requestOptions)
-      .then((response) => response.json())
-      .then((result) => authContext.login(result.user, result.accessToken))
-      .catch((error) => console.error(error));
+    }).then((res) => {
+      console.log(res);
+      if (res.ok) {
+        return res.json().then((result) => {
+          console.log(result);
+          authContext.login(result.user, result.accessToken);
+        });
+      } else {
+        if (res.status === 403) {
+          swal({
+            title: "این شماره تماس مسدود است",
+            icon: "error",
+            buttons: "ok",
+          });
+        }
+        return;
+      }
+    });
 
     console.log("User Register");
   };
@@ -151,10 +162,7 @@ const Register = () => {
                 type="phone"
                 placeholder="شماره تلفن"
                 onInputHandler={onInputHandler}
-                validations={[
-                  minValidator(10),
-                  maxValidator(12),
-                ]}
+                validations={[minValidator(10), maxValidator(12)]}
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
             </div>
