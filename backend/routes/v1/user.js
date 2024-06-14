@@ -19,7 +19,7 @@ router
   .get(isAuthenticated, isAdminMiddleware, userController.getAll);
 
 router
-  .route(":/id")
+  .route("/:id")
   .delete(isAuthenticated, isAdminMiddleware, userController.removeUser);
 
 // router
