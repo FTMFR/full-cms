@@ -14,7 +14,6 @@ export default function Topbar() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         setAdmin(result);
       });
   }, []);
