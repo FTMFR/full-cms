@@ -32,6 +32,10 @@ const Register = () => {
         value: "",
         isValid: false,
       },
+      phone: {
+        value: "",
+        isValid: false,
+      },
       password: {
         value: "",
         isValid: false,
@@ -47,6 +51,7 @@ const Register = () => {
       name: formState.inputs.name.value,
       username: formState.inputs.username.value,
       email: formState.inputs.email.value,
+      email: formState.inputs.phone.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
     };
@@ -134,6 +139,21 @@ const Register = () => {
                   minValidator(5),
                   maxValidator(20),
                   emailValidator(),
+                ]}
+              />
+              <i className="login-form__password-icon fa fa-envelope"></i>
+            </div>
+            <div className="login-form__password">
+              <Input
+                id="phone"
+                element="input"
+                className="login-form__password-input"
+                type="phone"
+                placeholder="شماره تلفن"
+                onInputHandler={onInputHandler}
+                validations={[
+                  minValidator(10),
+                  maxValidator(12),
                 ]}
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
