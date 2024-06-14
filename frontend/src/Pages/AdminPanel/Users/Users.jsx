@@ -1,14 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "../DataTable/DataTable";
+import swal from "sweetalert";
 
 const Users = () => {
+  const localDataToken = JSON.parse(localStorage.getItem("User-Token"));
+  const [usersData, setUsersData] = useState([]);
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  const getAllUsers = () => {
+    fetch(`http://localhost:4000/v1/users`, {
+      headers: {
+        Authorization: `Bearer ${localDataToken.token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setUsersData(result);
+      });
+  };
+
+  function splitWordAtSpace(word) {
+    const trimStartWord = word.trimStart();
+    const indexOfSpace = trimStartWord.indexOf(" ");
+    if (indexOfSpace === -1) {
+      return [trimStartWord];
+    }
+    const firstPart = trimStartWord.slice(0, indexOfSpace);
+    const secondPart = trimStartWord.slice(indexOfSpace + 1);
+    return [firstPart, secondPart];
+  }
+
+  const deleteHandler = (id) => {
+    swal({
+      title: "آیا از حذف مطمئن هستید؟",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
+    }).then((result) => {
+      fetch(`http://localhost:4000/v1/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localDataToken.token}`,
+        },
+      }).then((res) => {
+        if (res.ok) {
+          swal({
+            title: "این کاربر با موفقیت حذف شد",
+            icon: "success",
+            buttons: "ok",
+          }).then(() => {
+            getAllUsers();
+          });
+        }
+      });
+    });
+  };
+
   return (
     <>
       <DataTable title="کاربران">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
-              <th>شناسه</th>
               <th>نام</th>
               <th>نام خانوادگی</th>
               <th>شماره</th>
@@ -19,24 +74,34 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>34223</td>
-              <td>علی</td>
-              <td>سعیدی</td>
-              <td>09123443243</td>
-              <td>ali@gmail.com</td>
-              <td>ehsan1323</td>
-              <td>
-                <button type="button" class="btn btn-primary edit-btn">
-                  ویرایش
-                </button>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger delete-btn">
-                  حذف
-                </button>
-              </td>
-            </tr>
+            {usersData.map((user) => (
+              <tr key={user._id}>
+                <td>{splitWordAtSpace(user.name)[0]}</td>
+                <td>{splitWordAtSpace(user.name)[1]}</td>
+                <td>{user.phone}</td>
+                <td>{user.email}</td>
+                <td>{user.username}</td>
+                <td>
+                  <button type="button" className="btn btn-primary edit-btn">
+                    ویرایش
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-danger delete-btn"
+                    onClick={() => deleteHandler(user._id)}
+                  >
+                    حذف
+                  </button>
+                </td>
+                <td>
+                  <button type="button" className="btn btn-warning edit-btn">
+                    بن
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </DataTable>
