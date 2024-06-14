@@ -22,9 +22,9 @@ router
   .route("/:id")
   .delete(isAuthenticated, isAdminMiddleware, userController.removeUser);
 
-// router
-//   .route("/ban/:id")
-//   .put(isAuthenticated, isAdminMiddleware, userController.banUser);
+router
+  .route("/ban/:id")
+  .put(isAuthenticated, isAdminMiddleware, userController.banUser);
 
 // router
 //   .route("/:id/sessions")

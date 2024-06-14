@@ -1,4 +1,5 @@
 const userModel = require("../../models/user");
+const banUserModel = require("../../models/ban-phone");
 
 // exports.create = async (req, res) => {
 //   const { name, description, shortName, categoryID, price } = req.body;
@@ -44,11 +45,15 @@ exports.removeUser = async (req, res) => {
   return res.status(200).json("User Deleted Successfully");
 };
 
-// exports.banUser = async (req, res) => {
-//     const mainUser = await userModel.find({ _id: req.params.id })
+exports.banUser = async (req, res) => {
+  const mainUser = await userModel.findOne({ _id: req.params.id }).lean();
+  const banUserResult = banUserModel.create({ phone: mainUser.phone });
 
-//     console.log(mainUser);
-// };
+  if (banUserResult) {
+    return res.status(200).json({ msg: "User ban successfully" });
+  }
+  return res.status(500).json({ msg: 'Error' })
+};
 
 // exports.getOne = async (req, res) => {
 //   const course = await courseModel

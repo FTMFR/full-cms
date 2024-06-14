@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
 
   // const validationResult = registerValidator(req.body);
   // if (validationResult != true) return res.status(422).json(validationResult);
-  const { username, password, name, email } = req.body;
+  const { username, password, name, email, phone } = req.body;
 
   const isUserExists = await userModel.findOne({
     $or: [{ username }, { email }],
@@ -31,6 +31,7 @@ exports.register = async (req, res) => {
     email,
     username,
     name,
+    phone,
     password: hashedPassword,
     role: countOfRegisteredUser > 0 ? "USER" : "ADMIN",
   });
@@ -40,7 +41,7 @@ exports.register = async (req, res) => {
   Reflect.deleteProperty(userObject, "password");
 
   const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1 day",
+    expiresIn: "30 day",
   });
 
   return res.status(201).json({ user: userObject, accessToken });
@@ -90,10 +91,10 @@ exports.getMe = async (req, res) => {
   for (const adminNotification of adminNotifications) {
     if (adminNotification.see === 0) {
 
-      notifications.push({
-        msg: adminNotification.msg,
-        _id: adminNotification._id
-      });
+      // notifications.push({
+        // msg: adminNotification.msg,
+        // _id: adminNotification._id
+      // });
     }
   }
 
