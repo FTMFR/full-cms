@@ -135,9 +135,24 @@ const Users = () => {
       },
       body: JSON.stringify(userInfosData),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+        if (res.ok) {
+          swal({
+            title: "کاربر با موفقیت افزوده شد.",
+            icon: "success",
+            buttons: "ok",
+          });
+        } else {
+          swal({
+            title: "برای افزودن کاربر مشکلی پیش آمده است",
+            icon: "warning",
+            buttons: "ok",
+          });
+        }
+        res.json();
+      })
       .then((result) => {
-        console.log(result);
         userInfosData.name = "";
         userInfosData.username = "";
         userInfosData.email = "";
