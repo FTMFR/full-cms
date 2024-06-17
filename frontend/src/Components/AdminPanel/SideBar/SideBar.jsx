@@ -6,20 +6,19 @@ import swal from "sweetalert";
 
 const SideBar = () => {
   const authContext = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logoutHandler = (e) => {
     e.preventDefault();
-  
-swal({
-  title: 'با موفقیت لاگ اوت کردید.',
-  icon: 'success',
-  buttons: 'ok'
-}).then(()=>{
-  authContext.logout()
-  navigate('/')
-})
-  
+
+    swal({
+      title: "با موفقیت لاگ اوت کردید.",
+      icon: "success",
+      buttons: "ok",
+    }).then(() => {
+      authContext.logout();
+      navigate("/");
+    });
   };
 
   return (
@@ -68,9 +67,9 @@ swal({
             </a>
           </li>
           <li>
-            <a href="/">
+            <Link to="category">
               <span>دسته‌بندی‌ها</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="/" onClick={logoutHandler}>
