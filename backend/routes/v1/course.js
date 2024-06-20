@@ -14,7 +14,7 @@ const router = express.Router();
 router
   .route("/")
   .post(
-    // multer({ storage: multerStorage }).single('cover'),
+    multer({ storage: multerStorage, limits: {fileSize: 1000000000} }).single('cover'),
     authenticatedMiddleware,
     isAdminMiddleware,
     courseController.create
@@ -22,6 +22,9 @@ router
   .get(courseController.getAll);
 
 router
+  .route("/:id").delete(courseController.remove)
+
+  router
   .route("/:id/sessions")
   .post(isAdminMiddleware, courseController.createSession);
 
