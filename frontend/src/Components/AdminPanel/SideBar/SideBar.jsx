@@ -72,6 +72,11 @@ const SideBar = () => {
             </Link>
           </li>
           <li>
+            <Link to="contact">
+              <span>ارتباط با ما</span>
+            </Link>
+          </li>
+          <li>
             <a href="/" onClick={logoutHandler}>
               <span>خروج</span>
             </a>
