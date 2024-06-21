@@ -109,7 +109,6 @@ const AdminCourses = () => {
   const addNewCourse = (event) => {
     event.preventDefault();
 
-
     let formData = new FormData();
     formData.append("name", formState.inputs.name.value);
     formData.append("description", formState.inputs.description.value);
@@ -120,24 +119,32 @@ const AdminCourses = () => {
     formData.append("status", status);
     formData.append("cover", courseCover);
 
-    fetch(`http://localhost:4000/v1/courses`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorageToken.token}`,
-      },
-      body: formData,
-    }).then((res) => {
-      console.log(res);
-      if (res.ok) {
-        swal({
-          title: "دوره جدید با موفقیت اضافه شد",
-          icon: "success",
-          buttons: "اوکی",
-        }).then(() => {
-          getAllCourses();
-        });
-      }
-    });
+    if (courseCategory === "-1") {
+      swal({
+        title: "لطفا یک دسته بندی انتخاب کنید.",
+        icon: "warning",
+        buttons: "ok",
+      });
+    } else {
+      fetch(`http://localhost:4000/v1/courses`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageToken.token}`,
+        },
+        body: formData,
+      }).then((res) => {
+        console.log(res);
+        if (res.ok) {
+          swal({
+            title: "دوره جدید با موفقیت اضافه شد",
+            icon: "success",
+            buttons: "اوکی",
+          }).then(() => {
+            getAllCourses();
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -247,6 +254,7 @@ const AdminCourses = () => {
               <div className="number input">
                 <label className="input-title">دسته‌بندی دوره</label>
                 <select onChange={selectCategory}>
+                  <option value="-1">لطفا دسته بندی را انتخاب کنید</option>
                   {allCategory.map((category) => (
                     <option key={category._id} value={category._id}>
                       {category.title}
@@ -301,7 +309,7 @@ const AdminCourses = () => {
                 </div>
               </div>
               <div className="col-6">
-                <div class="submit-btn">
+                <div className="submit-btn">
                   <input type="submit" value="افزودن" onClick={addNewCourse} />
                 </div>
               </div>
