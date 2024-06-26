@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { useForm } from "../../../hooks/useForm";
 import Input from "../../../Components/Form/Input";
 import { minValidator } from "../../../validators/rules";
+import Editor from "../../../Components/Form/Editor";
 
 const AdminArticle = () => {
   const [articles, setArticles] = useState([]);
@@ -11,6 +12,7 @@ const AdminArticle = () => {
   const [articleCover, setArticleCover] = useState({});
   const [artcleCategory, setArticleCategory] = useState("");
   const [categories, setCategories] = useState([]);
+  const [articleBody, setArticleBody] = useState("");
 
   const [formState, onInputHandler] = useForm(
     {
@@ -23,10 +25,6 @@ const AdminArticle = () => {
         isValid: false,
       },
       description: {
-        value: "",
-        isValid: false,
-      },
-      body: {
         value: "",
         isValid: false,
       },
@@ -88,28 +86,28 @@ const AdminArticle = () => {
   const postArticle = (e) => {
     e.preventDefault();
 
-    const articleData = {
-      title: `${formState.inputs.title.value}`,
-      description: `${formState.inputs.description.value}`,
-      body: `${formState.inputs.body.value}`,
-      shortName: formState.inputs.shortName.value,
-      categoryID: `${artcleCategory}`,
-      cover: articleCover,
-    };
+    let formDatas = new FormData();
+    formDatas.append("title", formState.inputs.title.value);
+    formDatas.append("description", formState.inputs.description.value);
+    formDatas.append("body", articleBody);
+    formDatas.append("shortName", formState.inputs.shortName.value);
+    formDatas.append("categoryID", artcleCategory);
+    formDatas.append("cover", articleCover);
 
     swal({
       title: "آیا از اضافه کردن این مقاله اطمینان دارید؟",
       icon: "warning",
       buttons: ["خیر", "بله"],
     }).then((result) => {
+    console.log(result);
+    
       if (result) {
         fetch(`http://localhost:4000/v1/articles`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorageToken.token}`,
           },
-          body: JSON.stringify(articleData),
+          body: formDatas,
         }).then((res) => {
           if (res.ok) {
             swal({
@@ -117,8 +115,8 @@ const AdminArticle = () => {
               icon: "success",
               buttons: "ok",
             }).then(() => {
-              res.json();
               getAllArticles();
+              res.json();
             });
           } else {
             swal({
@@ -191,14 +189,7 @@ const AdminArticle = () => {
                   متن مقاله
                 </label>
 
-                <Input
-                  element="textarea"
-                  type="text"
-                  id="body"
-                  onInputHandler={onInputHandler}
-                  validations={[minValidator(5)]}
-                  className="article-textarea"
-                />
+                <Editor value={articleBody} setValue={setArticleBody} />
                 <span className="error-message text-danger"></span>
               </div>
             </div>
