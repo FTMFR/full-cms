@@ -9,7 +9,7 @@ const ArticleBox = (props) => {
         <div className="article-card__header">
           <Link to={`/article-info/${props.shortName}`} className="article-card__link-img">
             <img
-              src={`../images/blog/${props.cover}`}
+              src={`${props.cover}`}
               className="article-card__img"
               alt="article cover"
             />
