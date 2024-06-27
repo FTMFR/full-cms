@@ -6,6 +6,7 @@ import Footer from "../../Components/Footer/Footer";
 import BreadCrumb from "../../Components/BreadCrump/BreadCrumb";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 import { useParams } from "react-router-dom";
+import domPurify from 'dompurify'
 
 const Article = () => {
   const [articleDetails, setArticleDetails] = useState({});
@@ -47,14 +48,14 @@ const Article = () => {
                   <div className="article-header__category article-header__item">
                     <i className="far fa-folder article-header__icon"></i>
                     <a href="/" className="article-header__text">
-                      {articleDetails.categoryID.title}
+                      {/* {articleDetails.categoryID.title} */}
                     </a>
                   </div>
 
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
                     <a href="/" className="article-header__text">
-                      {articleDetails.creator.name}
+                      {/* {articleDetails.creator.name} */}
                     </a>
                   </div>
 
@@ -164,8 +165,8 @@ const Article = () => {
                     className="article-section__img"
                   />
                 </div>
-                <div className="article-section">
-                  <h2 className="article-section__title">
+                <div className="article-section" dangerouslySetInnerHTML={{__html: domPurify.sanitize(articleDetails.body)}}>
+                  {/* <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
                   <p className="paragraph article-section__text">
@@ -178,7 +179,7 @@ const Article = () => {
                     به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا
                     اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان
                     و به زبان فارسی این زبان را یاد بگیرید.
-                  </p>
+                  </p> */}
                 </div>
                 <div className="article-section">
                   <h2 className="article-section__title">
