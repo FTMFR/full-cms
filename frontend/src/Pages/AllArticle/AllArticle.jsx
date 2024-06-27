@@ -29,7 +29,7 @@ const AllArticle = () => {
           { id: 1, title: "خانه", to: "" },
           {
             id: 2,
-            title: "تمامی دوره ها",
+            title: "تمامی مقاله ها",
             to: "articles/1",
           },
         ]}
