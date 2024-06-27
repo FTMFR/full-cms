@@ -94,14 +94,14 @@ exports.getMe = async (req, res) => {
 
   const notifications = [];
 
-  // for (const adminNotification of adminNotifications) {
-  //   if (adminNotification.see === 0) {
-  //     notifications.push({
-  //       msg: adminNotification.msg,
-  //       _id: adminNotification._id,
-  //     });
-  //   }
-  // }
+  for (const adminNotification of adminNotifications) {
+    if (adminNotification.see === 0) {
+      notifications.push({
+        msg: adminNotification.msg,
+        _id: adminNotification._id,
+      });
+    }
+  }
 
   return res.json({ ...req.user, courses, notifications });
 };
