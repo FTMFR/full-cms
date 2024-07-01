@@ -12,6 +12,10 @@ const schema = new mongoose.Schema(
     },
     video: {
       type: String,
+      required: false,
+    },
+    free: {
+      type: Number,
       required: true,
     },
     course: {

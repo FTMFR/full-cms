@@ -86,11 +86,12 @@ exports.getOne = async (req, res) => {
 };
 
 exports.createSession = async (req, res) => {
-  const { title, time } = req.body;
+  const { title, time, free } = req.body;
 
   const session = await sessionModel.create({
     title,
     time,
+    free,
     course: req.params.id,
     video: req.file.filename,
   });
@@ -146,4 +147,31 @@ exports.remove = async (req, res) => {
     return res.status(404).json({ message: "Course Not Found!" });
   }
   return res.json(deletedCourse);
+};
+
+exports.removeSession = async (req, res) => {
+  const deletedSession = await sessionModel.findOneAndRemove({
+    _id: req.params.id,
+  });
+  if (!deletedSession) {
+    return res.status(404).json({ message: "Session Not Found!" });
+  }
+  return res.json(deletedSession);
+};
+
+exports.getSessionInfo = async (req, res) => {
+  const course = await courseModel
+    .findOne({ shortName: req.params.shortName })
+    .lean();
+
+  const session = await sessionModel.findOne({
+    course: course._id,
+    _id: req.params.sessionID,
+  });
+
+  const sessions = await sessionModel.find({ course: course._id });
+
+  console.log(sessions);
+
+  res.json({ sessions, session });
 };

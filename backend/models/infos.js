@@ -1,24 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    title: {
+    phone: {
       type: String,
       required: true,
     },
-    href: {
+    email: {
       type: String,
       required: true,
     },
-    parent: {
-      type: mongoose.Types.ObjectId,
-      ref: 'Menu',
-      required: false
+    logo: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const model = mongoose.model('Menu', schema);
+const model = mongoose.model("Info", schema);
 
 module.exports = model;
