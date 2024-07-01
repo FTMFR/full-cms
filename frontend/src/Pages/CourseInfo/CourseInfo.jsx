@@ -11,6 +11,7 @@ import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea
 import swal from "sweetalert";
 
 const CourseInfo = () => {
+  const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
   const [oneCourse, setOneCourse] = useState([]);
   const [breadCrumb, setBreadCrumb] = useState([]);
   const [creator, setCreator] = useState([]);
@@ -23,8 +24,10 @@ const CourseInfo = () => {
   const { courseName } = useParams();
 
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
+    getAllCourses();
+  }, []);
 
+  const getAllCourses = () => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       method: "POST",
       headers: {
@@ -42,9 +45,9 @@ const CourseInfo = () => {
         setUpdateAt(courseInfo.updatedAt);
         setComment(courseInfo.comments);
         setSession(courseInfo.sessions);
-        console.log(comments);
+        console.log(courseInfo);
       });
-  }, []);
+  };
 
   const submitComment = (newCommentBody) => {
     const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
@@ -271,7 +274,7 @@ const CourseInfo = () => {
                   <div className="introduction__topic">
                     <Accordion defaultActiveKey="0">
                       <Accordion.Item eventKey="0" className="accordion">
-                        <Accordion.Header>معرفی دوره</Accordion.Header>
+                        <Accordion.Header>فصل اول دوره</Accordion.Header>
                         {session.map((session, index) => (
                           <Accordion.Body
                             className="introduction__accordion-body"

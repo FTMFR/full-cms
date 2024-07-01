@@ -11,7 +11,7 @@ const CommentsTextArea = ({ comments, submitComment }) => {
     setNewCommentBody(event.target.value);
   };
 
-  console.log(comments);
+  // console.log(comments);
 
   return (
     <div className="comments">
