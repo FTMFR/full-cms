@@ -67,7 +67,12 @@ const SideBar = () => {
             </Link>
           </li>
           <li>
-            <a href="/">
+            <Link to="comments">
+              <span>کامنت ها</span>
+            </Link>
+          </li>
+          <li>
+            <a href="offs">
               <span>کدهای تخفیف</span>
             </a>
           </li>
