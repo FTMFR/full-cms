@@ -740,3 +740,13 @@ ul {
 .active-modal-notfication .home-notification-modal {
   display: block !important;
 }
+
+.answer-contact {
+  color: white;
+  background-color: var(--primary-color) !important;
+}
+
+.no-answer-contact {
+  color: white;
+  background-color: red !important;
+}
