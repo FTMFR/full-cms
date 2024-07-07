@@ -18,6 +18,10 @@ import Menus from "./Pages/AdminPanel/Menus/Menus";
 import AdminCategory from "./Pages/AdminPanel/AdminCategory/AdminCategory";
 import AdminContact from "./Pages/AdminPanel/AdminContact/AdminContact";
 import Session from "./Pages/AdminPanel/Session/Session";
+import Sessions from "./Components/Session/Sessions";
+import Comments from "./Pages/AdminPanel/Comments/Comments";
+import Offs from "./Pages/AdminPanel/Offs/Offs";
+import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -32,15 +36,20 @@ const routes = [
   { path: "/register", element: <Register /> },
   { path: "/contact", element: <Contact /> },
   { path: "/search/:value", element: <Search /> },
+  { path: "/:courseName/:sessionID", element: <Sessions /> },
+
   {
     path: "/p-admin",
     element: <AdminPanel />,
     children: [
+      { path: "", element: <PAdminIndex /> },
       { path: "users", element: <Users /> },
       { path: "courses", element: <AdminCourses /> },
       { path: "articles", element: <AdminArticle /> },
       { path: "category", element: <AdminCategory /> },
       { path: "menus", element: <Menus /> },
+      { path: "comments", element: <Comments /> },
+      { path: "offs", element: <Offs /> },
       { path: "contact", element: <AdminContact /> },
       { path: "session", element: <Session /> },
     ],
