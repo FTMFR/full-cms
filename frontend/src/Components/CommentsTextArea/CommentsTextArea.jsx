@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 const CommentsTextArea = ({ comments, submitComment }) => {
   const [newCommentBody, setNewCommentBody] = useState("");
+  const [scorecomment, setScoreComment] = useState("-1");
   const authContext = useContext(AuthContext);
 
   const onChangeHandler = (event) => {
     setNewCommentBody(event.target.value);
   };
 
-  // console.log(comments);
 
   return (
     <div className="comments">
@@ -116,11 +116,17 @@ const CommentsTextArea = ({ comments, submitComment }) => {
           <div className="comments__respond">
             <div className="comments__score">
               <span className="comments__score-title">امتیاز شما</span>
-              <div className="comments__score-input">
-                <span className="comments__score-input-text">
-                  امتیاز خود را انتخاب کنید
-                </span>
-                <i className="fas fa-angle-down	 comments__input-icon"></i>
+              <div className="col-12">
+                <select className="form-select form-control font-bold" onChange={(e)=>setScoreComment(e.target.value)}>
+                  <option value="-1" className="form-control">
+                    امتیاز خود را وارد کنید
+                  </option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
               </div>
             </div>
             <div className="comments__respond-content">
@@ -134,7 +140,7 @@ const CommentsTextArea = ({ comments, submitComment }) => {
             <button
               type="submit"
               className="comments__respond-btn"
-              onClick={() => submitComment(newCommentBody)}
+              onClick={() => submitComment(newCommentBody,scorecomment)}
             >
               ارسال
             </button>
