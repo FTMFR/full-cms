@@ -43,7 +43,7 @@ const Presell = () => {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {showCourses.map((course) => (
+                {allPreSells.map((course) => (
                   <CourseBox {...course} key={course._id} />
                 ))}
               </div>
