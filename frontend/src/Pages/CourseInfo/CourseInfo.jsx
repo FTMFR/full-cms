@@ -12,19 +12,26 @@ import swal from "sweetalert";
 
 const CourseInfo = () => {
   const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
-  const [oneCourse, setOneCourse] = useState([]);
+  const [oneCourse, setOneCourse] = useState({});
   const [breadCrumb, setBreadCrumb] = useState([]);
-  const [creator, setCreator] = useState([]);
+  const [creator, setCreator] = useState({});
   const [createdAt, setCreatedAt] = useState("");
   const [updateAt, setUpdateAt] = useState("");
   const [comments, setComment] = useState([]);
   const [session, setSession] = useState([]);
   const [newCommentBody, setNewCommentBody] = useState("");
+  const [relatedCourse, setRelatedCourse] = useState([]);
 
   const { courseName } = useParams();
 
   useEffect(() => {
     getAllCourses();
+
+    fetch(`http://localhost:4000/v1/courses/related/${courseName}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setRelatedCourse(result);
+      });
   }, []);
 
   const getAllCourses = () => {
@@ -49,7 +56,7 @@ const CourseInfo = () => {
       });
   };
 
-  const submitComment = (newCommentBody) => {
+  const submitComment = (newCommentBody, scorecomment) => {
     const localStorageData = JSON.parse(localStorage.getItem("User-Token"));
 
     fetch("http://localhost:4000/v1/comments", {
@@ -61,6 +68,7 @@ const CourseInfo = () => {
       body: JSON.stringify({
         body: newCommentBody,
         courseShortName: courseName,
+        score: scorecomment,
       }),
     })
       .then((res) => res.json())
@@ -73,6 +81,25 @@ const CourseInfo = () => {
         console.log(result);
         setNewCommentBody("");
       });
+  };
+
+  const registerInCourse = (id, price) => {
+    console.log(id);
+
+    if (price === 0) {
+      fetch(`http://localhost:4000/v1/courses/${id}/register`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          price: price,
+        }),
+      }).then((res) => {
+        res.json();
+      });
+    }
   };
 
   return (
@@ -119,9 +146,9 @@ const CourseInfo = () => {
 
             <div className="col-6">
               <video
-                src={`../images/courses/${oneCourse.cover}`}
+                src={`${oneCourse.cover}`}
                 alt={oneCourse.name}
-                poster={`../images/courses/${oneCourse.cover}`}
+                poster={`${oneCourse.cover}`}
                 className="course-info__video"
                 controls
               ></video>
@@ -146,11 +173,7 @@ const CourseInfo = () => {
                           : "در حال برگزاری"
                       }
                     />
-                    <CourseDetailBox
-                      icon="clock"
-                      title=" مدت زمان دوره:"
-                      desc={`${oneCourse.price / 100000} ساعت`}
-                    />
+                    <CourseDetailBox icon="clock" title=" مدت زمان دوره:" />
                     <CourseDetailBox
                       icon="calendar-alt"
                       title="شروع دوره :"
@@ -164,7 +187,7 @@ const CourseInfo = () => {
                     <CourseDetailBox
                       icon="clock"
                       title="قیمت دوره"
-                      desc={oneCourse.price}
+                      desc={oneCourse.price === 0 ? "رایگان" : oneCourse.price}
                     />
                     <CourseDetailBox
                       icon="calendar-alt"
@@ -200,7 +223,7 @@ const CourseInfo = () => {
                       {oneCourse.name}
                     </span>
                     <img
-                      src={`../images/courses/${oneCourse.cover}`}
+                      src={`${oneCourse.cover}`}
                       alt="course info"
                       className="introduction__img img-fluid"
                     />
@@ -274,29 +297,51 @@ const CourseInfo = () => {
                   <div className="introduction__topic">
                     <Accordion defaultActiveKey="0">
                       <Accordion.Item eventKey="0" className="accordion">
-                        <Accordion.Header>فصل اول دوره</Accordion.Header>
+                        <Accordion.Header>جلسات دوره</Accordion.Header>
                         {session.map((session, index) => (
                           <Accordion.Body
                             className="introduction__accordion-body"
                             key={index}
                           >
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">
-                                {index + 1}
-                              </span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <Link
-                                to="/"
-                                className="introduction__accordion-link"
-                              >
-                                {session.title}
-                              </Link>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                {session.time}
-                              </span>
-                            </div>
+                            {session.free === 0 ? (
+                              <>
+                                <div className="introduction__accordion-right">
+                                  <span className="introduction__accordion-count">
+                                    {index + 1}
+                                  </span>
+                                  <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                  <Link
+                                    to={`/courses/${courseName}/${session._id}`}
+                                    className="introduction__accordion-link"
+                                  >
+                                    {session.title}
+                                  </Link>
+                                </div>
+                                <div className="introduction__accordion-left">
+                                  <span className="introduction__accordion-time">
+                                    {session.time}
+                                  </span>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="introduction__accordion-right">
+                                  <span className="introduction__accordion-count">
+                                    {index + 1}
+                                  </span>
+                                  <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                  <span className="introduction__accordion-link">
+                                    {session.title}
+                                  </span>
+                                </div>
+                                <div className="introduction__accordion-left">
+                                  <span className="introduction__accordion-time">
+                                    {session.time}
+                                  </span>
+                                  <i className="fa fa-lock"></i>
+                                </div>
+                              </>
+                            )}
                           </Accordion.Body>
                         ))}
                       </Accordion.Item>
@@ -308,7 +353,7 @@ const CourseInfo = () => {
                   <div className="techer-details__header">
                     <div className="techer-details__header-right">
                       <img
-                        src={`..${creator.profile}`}
+                        src={`.${creator.profile}`}
                         alt="Teacher Profile"
                         className="techer-details__header-img"
                       />
@@ -351,7 +396,12 @@ const CourseInfo = () => {
                         دانشجوی دوره هستید
                       </span>
                     ) : (
-                      <span className="course-info__register-title">
+                      <span
+                        className="course-info__register-title"
+                        onClick={() =>
+                          registerInCourse(oneCourse._id, oneCourse.price)
+                        }
+                      >
                         <i className="fas fa-graduation-cap course-info__register-icon"></i>{" "}
                         ثبت نام در دوره
                       </span>
@@ -417,54 +467,27 @@ const CourseInfo = () => {
                     دوره های مرتبط
                   </span>
                   <ul className="course-info__courses-list">
-                    <li className="course-info__courses-list-item">
-                      <a href="/" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/js_project.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          پروژه های تخصصی با جاوا اسکریپت
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="/" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/fareelancer.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          تعیین قیمت پروژه های فریلنسری
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="/" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/nodejs.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          دوره Api نویسی
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="/" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/jango.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          متخصص جنگو
-                        </span>
-                      </a>
-                    </li>
+                    {relatedCourse.length &&
+                      relatedCourse.map((course) => (
+                        <li
+                          className="course-info__courses-list-item"
+                          key={course._id}
+                        >
+                          <Link
+                            to={`${course.shortName}`}
+                            className="course-info__courses-link"
+                          >
+                            <img
+                              src={`${course.cover}`}
+                              alt="Course Cover"
+                              className="course-info__courses-img"
+                            />
+                            <span className="course-info__courses-text">
+                              {course.name}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>
