@@ -12,6 +12,7 @@ const Session = () => {
   const [videoUploader, setVideoUploader] = useState({});
   const [courses, setCourses] = useState([]);
   const [allSessions, setAllSessions] = useState([]);
+  const [sessionStatus, setSessionStatus] = useState("-1");
 
   const [formState, onInputHandler] = useForm(
     {
@@ -38,7 +39,8 @@ const Session = () => {
     const formdata = new FormData();
     formdata.append("title", formState.inputs.title.value);
     formdata.append("time", formState.inputs.time.value);
-    formdata.append("video", videoUploader, "[PROXY]");
+    formdata.append("video", videoUploader);
+    formdata.append("free", sessionStatus);
 
     swal({
       title: "آیا از اضافه کردن این جلسه اطمینان دارید؟",
@@ -175,6 +177,36 @@ const Session = () => {
               </div>
             </div>
             <div className="col-12">
+              <div className="presell">
+                <label className="input-title">وضعیت دوره</label>
+                <div className="radios">
+                  <div className="presell-true">
+                    <label>
+                      <span>رایگان</span>
+                      <input
+                        type="radio"
+                        value="1"
+                        name="presell"
+                        defaultChecked
+                        onClick={(e) => setSessionStatus(e.target.value)}
+                      />
+                    </label>
+                  </div>
+                  <div className="presell-false">
+                    <label>
+                      <span>غیر رایگان</span>
+                      <input
+                        type="radio"
+                        value="0"
+                        name="presell"
+                        onClick={(e) => setSessionStatus(e.target.value)}
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-12">
               <div className="bottom-form">
                 <div className="submit-btn">
                   <input
@@ -188,7 +220,7 @@ const Session = () => {
           </form>
         </div>
       </div>
-      a
+
       <DataTable title="تمامی جلسات">
         <table className="table">
           <thead>
@@ -198,6 +230,7 @@ const Session = () => {
               <th>زمان جلسه</th>
               <th>تاریخ ایجاد</th>
               <th>تاریخ آپدیت</th>
+              <th>وضعیت جلسه</th>
               <th>ویرایش</th>
               <th>حذف</th>
             </tr>
@@ -210,6 +243,7 @@ const Session = () => {
                 <td>{session.time}</td>
                 <td>{session.createdAt.slice(0, 10)}</td>
                 <td>{session.updatedAt.slice(0, 10)}</td>
+                <td>{session.free === 0 ? "غیر رایگان" : "رایگان"}</td>
 
                 <td>
                   <button
