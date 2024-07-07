@@ -6,6 +6,7 @@ import {
 } from "../../../validators/rules";
 import DataTable from "../DataTable/DataTable";
 import swal from "sweetalert";
+import "./../adminPanel.css";
 
 const AdminContact = () => {
   const localStoragetoken = JSON.parse(localStorage.getItem("User-Token"));
@@ -49,11 +50,6 @@ const AdminContact = () => {
   const sendResponseHandler = (email, e) => {
     e.preventDefault();
 
-    const response = {
-      email: ``,
-      answer: "",
-    };
-
     swal({
       title: "پاسخ به موضوع",
       content: "input",
@@ -70,21 +66,19 @@ const AdminContact = () => {
             email,
             answer: `${result}`,
           }),
-        })
-          .then((res) => {
+        }).then((res) => {
+          console.log(res);
+          if (res.ok) {
+            swal({
+              title: "جواب با موفقیت ارسال شد.",
+              icon: "success",
+              buttons: "ok",
+            });
             console.log(res);
-            if (res.ok) {
-              swal({
-                title: "جواب با موفقیت ارسال شد.",
-                icon: "success",
-                buttons: "ok",
-              });
-              return res.json();
-            }
-          })
-          .then((result) => {
-            console.log(result);
-          });
+            res.json();
+            getAllContacts();
+          }
+        });
       }
     });
   };
@@ -107,7 +101,15 @@ const AdminContact = () => {
           <tbody>
             {contacts.map((contact, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td
+                  className={
+                    contact.answer === 1
+                      ? "answer-contact"
+                      : "no-answer-contact"
+                  }
+                >
+                  {index + 1}
+                </td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>
