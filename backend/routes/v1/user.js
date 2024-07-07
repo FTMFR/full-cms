@@ -26,4 +26,8 @@ router
   .route("/ban/:id")
   .put(isAuthenticated, isAdminMiddleware, userController.banUser);
 
+router
+  .route("/courses")
+  .get(isAuthenticated, userController.getUserCourses);
+
 module.exports = router;

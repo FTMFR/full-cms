@@ -11,7 +11,29 @@ exports.create = async (req, res) => {
     body,
     creator: req.user._id,
     categoryID,
-    cover: req.file.filename
+    cover: req.file.filename,
+    publish: 1
+  });
+
+  const populatedCourse = await articleModel
+    .findById(article._id)
+    .populate("creator", "-password");
+
+  return res.status(201).json(populatedCourse);
+};
+
+exports.saveDraft = async (req, res) => {
+  const { title, description, body, shortName, categoryID } = req.body;
+
+  const article = await articleModel.create({
+    title,
+    description,
+    shortName,
+    body,
+    creator: req.user._id,
+    categoryID,
+    cover: req.file.filename,
+    publish: 0
   });
 
   const populatedCourse = await articleModel
@@ -23,7 +45,6 @@ exports.create = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   const articles = await articleModel.find().populate("creator", "-password").sort({ _id: -1 });
-
   return res.json(articles);
 };
 

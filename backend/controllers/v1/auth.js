@@ -27,7 +27,7 @@ exports.register = async (req, res) => {
   const isUserBan = await banUserModel.find({ phone });
   if (isUserBan.length) {
     return res.status(403).json({
-      message: "this phone number ban!",
+      message: "this phone number ban!"
     });
   }
 

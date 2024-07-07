@@ -36,12 +36,32 @@ exports.getAll = async (req, res) => {
     .lean()
     .sort({ _id: -1 });
 
+  const registers = await courseUserModel.find({}).lean();
+  const comments = await commentModel.find().lean();
+
   let allCourses = [];
   courses.forEach((course) => {
+    let courseTotalScore = 5;
+    let courseRegisters = registers.filter(
+      (register) => register.course.toString() === course._id.toString()
+    );
+
+    let courseScores = comments.filter(
+      (comment) => comment.course.toString() === course._id.toString()
+    );
+
+    courseScores.forEach((comment) => {
+      courseTotalScore += Number(comment.score);
+    });
+
     allCourses.push({
       ...course,
       categoryID: course.categoryID.title,
       creator: course.creator.name,
+      registers: courseRegisters.length,
+      courseAverageScore: Math.floor(
+        courseTotalScore / (courseScores.length + 1)
+      ),
     });
   });
 
@@ -57,7 +77,7 @@ exports.getOne = async (req, res) => {
 
   const sessions = await sessionModel.find({ course: course._id }).lean();
   const comments = await commentModel
-    .find({ course: course._id })
+    .find({ course: course._id, answer: 1 })
     .populate("creator")
     .lean();
 
@@ -66,6 +86,7 @@ exports.getOne = async (req, res) => {
       course: course._id,
     })
     .count();
+
   let isUserRegisteredToThisCourse = null;
   if (req.user) {
     isUserRegisteredToThisCourse = !!(await courseUserModel.findOne({
@@ -76,11 +97,29 @@ exports.getOne = async (req, res) => {
     isUserRegisteredToThisCourse = false;
   }
 
+  let allComments = [];
+
+  comments.forEach((comment) => {
+    let mainCommentAnswerInfo = null;
+    comments.forEach((answerComment) => {
+      if (String(comment._id) == String(answerComment.mainCommendID)) {
+        mainCommentAnswerInfo = { ...answerComment };
+      }
+    });
+    if (!comment.mainCommendID) {
+      allComments.push({
+        ...comment,
+        course: comment.course.name,
+        answerContent: mainCommentAnswerInfo,
+      });
+    }
+  });
+
   return res.json({
     ...course,
     courseStudentsCount,
     sessions,
-    comments,
+    comments: allComments,
     isUserRegisteredToThisCourse,
   });
 };
@@ -121,6 +160,7 @@ exports.register = async (req, res) => {
   await courseUserModel.create({
     user: req.user._id,
     course: req.params.id,
+    price: req.body.price,
   });
 
   return res.status(201).json({ message: "you are registered successfully." });
@@ -163,9 +203,24 @@ exports.getSessionInfo = async (req, res) => {
   const course = await courseModel
     .findOne({ shortName: req.params.shortName })
     .lean();
+
   const session = await sessionModel.findOne({
     course: course._id,
     _id: req.params.sessionID,
   });
-  res.json(session);
+
+  const sessions = await sessionModel.find({ course: course._id });
+
+  res.json({ sessions, session });
 };
+
+exports.getRelated = async (req, res) => {
+  const { shortName } = req.params
+  const course = await courseModel.findOne({ shortName })
+  let relatedCourses = await courseModel.find({ categoryID: course.categoryID })
+
+  relatedCourses = relatedCourses.filter(course => course.shortName !== shortName)
+
+  res.json(relatedCourses.splice(0, 4))
+
+}
